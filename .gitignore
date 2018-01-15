@@ -8,6 +8,7 @@ workbench.xmi
 # IDE
 *.ipr
 *.iml
+*.xml
 *.iws
 out/
 tmp/
