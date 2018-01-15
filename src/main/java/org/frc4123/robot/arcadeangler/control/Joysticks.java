@@ -7,9 +7,19 @@ public class Joysticks {
     private final Joystick driveStick;
     private final Joystick auxStick;
 
+    //A Button - Logitech
+    private static final int kControllerIntakeButton = 1;
+    //B Button - Logitech
+    private static final int kControllerEjectButton = 2;
+    //Left Joystick - Logitech
+    private static final int kControllerElevateAxis = 2;
+
+
     //Constructor
     public Joysticks() {
+        //driveStick = XBOX 360 Controller
         driveStick = new Joystick(0);
+        //auxStick = Logitech Gamepad F310 (switch on X)
         auxStick = new Joystick(1);
     }
 
@@ -44,16 +54,31 @@ public class Joysticks {
         EJECT, STOPPED, INTAKE
     }
 
-
     public Grabber getGrabberStatus() {
-        if (auxStick.getRawButton(1)){
+        if (auxStick.getRawButton(kControllerIntakeButton)){
             return Grabber.INTAKE;
         }
-        else if (auxStick.getRawButton(2)){
+        else if (auxStick.getRawButton(kControllerEjectButton)){
             return Grabber.EJECT;
         }
         else{
             return Grabber.STOPPED;
+        }
+    }
+
+    public enum Elevator{
+        UP, DOWN, STOPPED
+    }
+
+    public Elevator getElevatorStatus() {
+        if (auxStick.getRawAxis(kControllerElevateAxis) > 0){
+            return Elevator.DOWN;
+        }
+        else if (auxStick.getRawAxis(kControllerElevateAxis) < 0){
+            return Elevator.UP;
+        }
+        else{
+            return Elevator.STOPPED;
         }
     }
 
