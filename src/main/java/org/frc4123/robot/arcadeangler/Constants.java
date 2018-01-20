@@ -4,6 +4,8 @@ public class Constants {
 
     //TODO: Check all these values. Will be a progressive task
 
+    public static final int kTimeCubeEject = 2; //In seconds Todo: Hopefully...
+
     /***********AUTO***********/
 
     /**********TELEOP**********/
@@ -41,7 +43,7 @@ public class Constants {
     public static final double kHeadingClosedLoop_Tolerance_Default = 1;
 
     //Elevator
-    public static final int kShooterDefaultElevateSpeed = 1;
+    public static final int kElevatorDefaultElevateSpeed = 1;
 
 
     //Robot Ports - These should match up to TODO: create Google doc to outline motor controller ports
