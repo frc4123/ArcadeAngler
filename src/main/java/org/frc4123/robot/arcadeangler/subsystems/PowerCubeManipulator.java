@@ -11,8 +11,14 @@ public class PowerCubeManipulator {
         lManipulatorArm.eject();
         rManipulatorArm.eject();
     }
+
     public void intakeCube(){
         lManipulatorArm.intake();
         rManipulatorArm.intake();
+    }
+
+    public void stop(){
+        lManipulatorArm.stop();
+        rManipulatorArm.stop();
     }
 }
