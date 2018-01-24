@@ -15,7 +15,7 @@ public class Constants {
     public static final float kIntakeCubeSpeed = -1;
 
     //Climber Constants
-    public static final float kClimberSpeed = -1;
+    public static final float kClimberUpSpeed = -1;
 
     //Drive Chassis and wheel and motor constants
     public static final double kChassisWheelDiameterInch = 6;
@@ -58,6 +58,8 @@ public class Constants {
     //PowerCube Manipulator Speed Controllers
     public static final int id_grabber_wheel_left = 1;
     public static final int id_grabber_wheel_right = 0;
+    //PowerCube Grabber Limit Switch
+    public static final int id_intake_limit = 1; //TODO: Find real input ID
 
     //Elevator Speed Controllers
     public static final int id_elevate_talon_right = 4;
