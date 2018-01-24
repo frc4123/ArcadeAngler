@@ -3,7 +3,6 @@ package org.frc4123.robot.arcadeangler.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Timer;
-import org.frc4123.robot.arcadeangler.Constants;
 
 /**
  * Behaves like a Spark, but extends and retracts with timers
@@ -18,7 +17,7 @@ public class EjectIntakeSpeedController extends Spark {
 	private float speedEject;
 	private float speedIntake;
 	private float timeEject;
-	private DigitalInput intakelimit;
+	private DigitalInput intakeLimit;
 	
 	
 	/**
@@ -56,7 +55,7 @@ public class EjectIntakeSpeedController extends Spark {
 	 * @param intake_limit_id
 	 * 			  ID of reverse limit switch input.           
 	 */
-	public EjectIntakeSpeedController(final int channel, float timeEject, final int intake_limit_id, float speedEject, float speedIntake) {
+	public EjectIntakeSpeedController(final int channel, float speedIntake, final int intake_limit_id, float speedEject, float timeEject) {
 		// Call Spark's constructor
 		super(channel);
 
@@ -64,7 +63,7 @@ public class EjectIntakeSpeedController extends Spark {
 		this.speedEject = speedEject;
 		this.speedIntake = speedIntake;
 		this.timeEject = timeEject;
-		this.intakelimit = new DigitalInput(intake_limit_id);
+		this.intakeLimit = new DigitalInput(intake_limit_id);
 	}
 
 
@@ -107,16 +106,21 @@ public class EjectIntakeSpeedController extends Spark {
 			@Override
 			public void run() {
 				while(!isEjected() && currentState == CurrentState.EJECTING){
+					set(speedEject);
+					Timer ejectTimer = new Timer();
+					ejectTimer.reset();
+					ejectTimer.start();
+					if (ejectTimer.hasPeriodPassed(timeEject) == true){
+						timeEjectExpired = true;
+						set(0);
+					} else{
+						timeEjectExpired = false;
 						set(speedEject);
+					}
 
 				}
 				set(0);
 				currentState = CurrentState.STOPPED;
-				if (timer has expired){
-					timeEjectExpired = true;
-				}else {
-					timeEjectExpired = false;
-				}
 			}
 		}).start();
 	}
@@ -150,7 +154,7 @@ public class EjectIntakeSpeedController extends Spark {
 
 
 	public boolean isIntaked() {
-		return !intakelimit.get();
+		return !intakeLimit.get();
 		//We're using normally closed switches
 	}
 }
