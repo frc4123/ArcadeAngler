@@ -38,14 +38,16 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
+
         //PowerCube Manipulator Commands
-        if (mJoysticks.getGrabberStatus()== Joysticks.Grabber.INTAKE) {
+        if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.INTAKE) {
             mPCM.intakeCube();
         }else if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.EJECT){
             mPCM.ejectCube();
         }else {
             mPCM.stop();
         }
+
     }
 
     @Override
