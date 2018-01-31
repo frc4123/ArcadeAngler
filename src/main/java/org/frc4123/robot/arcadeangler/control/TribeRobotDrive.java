@@ -13,8 +13,6 @@ import org.frc4123.robot.arcadeangler.Utils;
 public class TribeRobotDrive extends DifferentialDrive{
     private static TalonSRX leftMaster = new TalonSRX(Constants.id_driveLeftMaster);
     private static TalonSRX leftSlave = new TalonSRX(Constants.id_driveLeftSlave);
-    SpeedControllerGroup m_left = new SpeedControllerGroup(leftMaster, leftSlave);
-
     private static TalonSRX rightMaster = new TalonSRX(Constants.id_driveRightMaster);
     private static TalonSRX rightSlave = new TalonSRX(Constants.id_driveRightSlave);
 
