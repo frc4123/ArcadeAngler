@@ -1,20 +1,19 @@
 package org.frc4123.robot.arcadeangler.control;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc4123.robot.arcadeangler.Constants;
 import org.frc4123.robot.arcadeangler.Utils;
 
 public class TribeRobotDrive extends DifferentialDrive{
-    private static TalonSRX leftMaster = new TalonSRX(Constants.id_driveLeftMaster);
-    private static TalonSRX leftSlave = new TalonSRX(Constants.id_driveLeftSlave);
-    private static TalonSRX rightMaster = new TalonSRX(Constants.id_driveRightMaster);
-    private static TalonSRX rightSlave = new TalonSRX(Constants.id_driveRightSlave);
+    private static WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.id_driveLeftMaster);
+    private static WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.id_driveLeftSlave);
+    private static WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.id_driveRightMaster);
+    private static WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.id_driveRightSlave);
 
     private final ADXRS450_Gyro mGyro;
 
@@ -89,8 +88,8 @@ public class TribeRobotDrive extends DifferentialDrive{
     public void setTalonControlMode(ControlMode mode){
         switch (mode){
             case RAW:
-                rightMaster.changeControlMode(TalonSRX.TalonControlMode.PercentVbus);
-                leftMaster.changeControlMode(TalonSRX.TalonControlMode.PercentVbus);
+                rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, 0);
+                leftMaster.set(ControlMode.PercentVbus, 0);
 
                 rightMaster.set(0);
                 leftMaster.set(0);
