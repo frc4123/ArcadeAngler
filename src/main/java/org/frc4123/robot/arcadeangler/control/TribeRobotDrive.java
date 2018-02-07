@@ -35,19 +35,15 @@ public class TribeRobotDrive extends DifferentialDrive{
 
         //Set up TalonSRXs in open loop mode
         //Set Masters to PercentVbus mode
-        leftMaster.changeControlMode(TalonSRX.TalonControlMode.PercentVbus);
-        leftMaster.set(0);
-        rightMaster.changeControlMode(TalonSRX.TalonControlMode.PercentVbus);
-        rightMaster.set(0);
+        leftMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Velocity, 0);
+        rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Velocity, 0);
 
         //Set Slaves to follow
-        leftSlave.changeControlMode(TalonSRX.TalonControlMode.Follower);
-        leftSlave.set(Constants.id_driveLeftMaster);
-        rightSlave.changeControlMode(TalonSRX.TalonControlMode.Follower);
-        rightSlave.set(Constants.id_driveRightMaster);
+        leftSlave.follow(leftMaster);
+        rightSlave.follow(rightMaster);
 
-        rightMaster.reverseOutput(true);
-        leftMaster.reverseSensor(true);
+        rightMaster.setInverted(true);
+        leftMaster.setSensorPhase(true);
 
         setTalonControlMode(driveMode);
 
@@ -89,26 +85,26 @@ public class TribeRobotDrive extends DifferentialDrive{
         switch (mode){
             case RAW:
                 rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, 0);
-                leftMaster.set(ControlMode.PercentVbus, 0);
+                leftMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, 0);
 
-                rightMaster.set(0);
-                leftMaster.set(0);
+               // rightMaster.set(0);
+               // leftMaster.set(0);
                 break;
 
             case ENCODER_VEL:
-                rightMaster.changeControlMode(TalonSRX.TalonControlMode.Speed);
-                leftMaster.changeControlMode(TalonSRX.TalonControlMode.Speed);
+                rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Velocity, 0);
+                leftMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Velocity, 0);
 
-                rightMaster.set(0);
-                leftMaster.set(0);
+                //rightMaster.set(0);
+                //leftMaster.set(0);
                 break;
 
             case ENCODER_POS:
-                rightMaster.changeControlMode(TalonSRX.TalonControlMode.Position);
-                leftMaster.changeControlMode(TalonSRX.TalonControlMode.Position);
+                rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Position, rightMaster.getActiveTrajectoryPosition());
+                leftMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Position, leftMaster.getActiveTrajectoryPosition());
 
-                rightMaster.set(rightMaster.getPosition());
-                leftMaster.set(leftMaster.getPosition());
+                //rightMaster.set(;
+                //leftMaster.set(leftMaster.getPosition());
                 break;
         }
     }
@@ -166,9 +162,9 @@ public class TribeRobotDrive extends DifferentialDrive{
                 headingPIDController.setSetpoint(mGyro.getAngle() + deltaSetpoint);
                 break;
             case LINEAR:
-                setSetpointRight(rightMaster.getPosition() + deltaSetpoint);
-                System.out.println("Right Position = " + rightMaster.getPosition());
-                setSetpointLeft(leftMaster.getPosition() + deltaSetpoint);
+                setSetpointRight(rightMaster.getActiveTrajectoryPosition() + deltaSetpoint);
+                System.out.println("Right Position = " + rightMaster.getActiveTrajectoryPosition());
+                setSetpointLeft(leftMaster.getActiveTrajectoryPosition() + deltaSetpoint);
                 break;
         }
     }
@@ -203,7 +199,7 @@ public class TribeRobotDrive extends DifferentialDrive{
             case HEADING:
                 return headingPIDController.getError();
             case LINEAR:
-                return (rightMaster.getError() + leftMaster.getError()) / 2;
+                return (rightMaster.getLastError() + leftMaster.getLastError()) / 2;
             default:
                 return 0;
         }
@@ -263,11 +259,11 @@ public class TribeRobotDrive extends DifferentialDrive{
     }
 
     public double getLeftVelocityInchesPerSecond(){
-        return Utils.encVelToInchesPerSecond(leftMaster.getEncVelocity());
+        return Utils.encVelToInchesPerSecond(leftMaster.getSelectedSensorVelocity(0));
     }
 
     public double getRightVelocityInchesPerSecond(){
-        return Utils.encVelToInchesPerSecond(rightMaster.getEncVelocity());
+        return Utils.encVelToInchesPerSecond(rightMaster.getSelectedSensorVelocity(0));
     }
 
     /**
@@ -278,8 +274,8 @@ public class TribeRobotDrive extends DifferentialDrive{
         SmartDashboard.putNumber("right_distance", getRightDistanceInches());
         SmartDashboard.putNumber("left_velocity", getLeftVelocityInchesPerSecond());
         SmartDashboard.putNumber("right_velocity", getRightVelocityInchesPerSecond());
-        SmartDashboard.putNumber("left_error", leftMaster.getClosedLoopError());
-        SmartDashboard.putNumber("right_error", rightMaster.getClosedLoopError());
+        SmartDashboard.putNumber("left_error", leftMaster.getClosedLoopError(0));
+        SmartDashboard.putNumber("right_error", rightMaster.getClosedLoopError(0));
         SmartDashboard.putNumber("gyro_angle", mGyro.getAngle());
 
         SmartDashboard.putNumber("robotdrive_setpoint_error", getSetpointError());
@@ -300,7 +296,7 @@ public class TribeRobotDrive extends DifferentialDrive{
      */
     public void resetSensors() {
         System.out.println("Resetting RobotDrive sensors");
-        leftMaster.setPosition(0);
+        leftMaster.setSelectedSensorPosition(leftMaster.);
         rightMaster.setPosition(0);
 
         mGyro.reset();
