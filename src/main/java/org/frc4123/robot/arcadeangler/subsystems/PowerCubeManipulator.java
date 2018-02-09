@@ -17,8 +17,20 @@ public class PowerCubeManipulator {
         rManipulatorArm.intake();
     }
 
-    public void stop(){
+    public void stopWheels(){
         lManipulatorArm.stop();
         rManipulatorArm.stop();
+    }
+
+    public void foldArmsDown(){
+
+    }
+
+    public void foldArmsUp(){
+
+    }
+
+    public void stopFolding(){
+
     }
 }

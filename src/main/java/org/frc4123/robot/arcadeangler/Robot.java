@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
         }else if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.EJECT){
             mPCM.ejectCube();
         }else {
-            mPCM.stop();
+            mPCM.stopWheels();
         }
     }
 
