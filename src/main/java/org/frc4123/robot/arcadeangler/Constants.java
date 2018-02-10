@@ -13,6 +13,8 @@ public class Constants {
     //PowerCube Manipulator Constants
     public static final float kEjectCubeSpeed = 1;
     public static final float kIntakeCubeSpeed = -1;
+    public static final float kFoldArmsUp = 1;
+    public static final float kFoldArmsDwn = -1;
 
     //Climber Constants
     public static final float kClimberUpSpeed = -1;
