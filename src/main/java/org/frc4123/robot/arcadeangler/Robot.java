@@ -31,6 +31,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
+
+        //Set all Motorcontrollers to start at 0, and establish followers
         l_master.set(ControlMode.PercentOutput, 0);
         l_slave.follow(l_master);
         r_master.set(ControlMode.PercentOutput, 0);
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
+        //Set the drivemotors to stop during disabled *For Safety Sake*
         mDrive.stopMotor();
     }
 
@@ -60,6 +63,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
+        //Rough Testing Drive
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
 
         //PowerCube Manipulator Commands
