@@ -63,6 +63,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
+        //Rough Testing Drive
+        mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
+
         //PowerCube Manipulator Commands
         switch (mJoysticks.getGrabberStatus()){
             case INTAKE:
