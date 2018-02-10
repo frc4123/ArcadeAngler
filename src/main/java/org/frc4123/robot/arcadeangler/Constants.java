@@ -60,6 +60,7 @@ public class Constants {
     //PowerCube Manipulator Speed Controllers
     public static final int id_grabber_wheel_left = 1;
     public static final int id_grabber_wheel_right = 0;
+    public static final int id_grabber_flipper_upper = 2;
     //PowerCube Grabber Limit Switch
     public static final int id_intake_limit = 1; //TODO: Find real input ID
 
