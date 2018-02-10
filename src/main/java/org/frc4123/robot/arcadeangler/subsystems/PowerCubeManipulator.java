@@ -11,18 +11,18 @@ public class PowerCubeManipulator {
     Spark armFlipperMotor = new Spark(Constants.id_grabber_flipper_upper);
 
     public void ejectCube(){
-        lManipulatorArm.eject();
-        rManipulatorArm.eject();
+        lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.EJECTING);
+        rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.EJECTING);
     }
 
     public void intakeCube(){
-        lManipulatorArm.intake();
-        rManipulatorArm.intake();
+        lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.INTAKING);
+        rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.INTAKING);
     }
 
     public void stopWheels(){
-        lManipulatorArm.stop();
-        rManipulatorArm.stop();
+        lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.STOPPED);
+        rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.STOPPED);
     }
 
     public void foldArmsDown(){
