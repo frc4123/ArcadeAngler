@@ -63,16 +63,25 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
-        //Rough Testing Drive
-        mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
-
         //PowerCube Manipulator Commands
-        if (mJoysticks.getGrabberStatus()== Joysticks.Grabber.INTAKE) {
-            mPCM.intakeCube();
-        }else if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.EJECT){
-            mPCM.ejectCube();
-        }else {
-            mPCM.stopWheels();
+        switch (mJoysticks.getGrabberStatus()){
+            case INTAKE:
+                mPCM.intakeCube();
+                break;
+            case EJECT:
+                mPCM.ejectCube();
+                break;
+            case UP:
+                mPCM.foldArmsUp();
+                break;
+            case DOWN:
+                mPCM.foldArmsDown();
+                break;
+            case STOPPED:
+                default:
+                    mPCM.stopWheels();
+                    mPCM.stopFolding();
+                break;
         }
     }
 
