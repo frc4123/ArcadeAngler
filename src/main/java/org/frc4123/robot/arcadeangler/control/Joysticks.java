@@ -13,6 +13,8 @@ public class Joysticks {
     private static final int kControllerEjectButton = 2;
     //Left Joystick - Logitech
     private static final int kControllerElevateAxis = 2;
+    //Right Joystick - Logitech
+    private static final int kControllerFlipAxis = 6;
 
 
     //Constructor
@@ -51,7 +53,7 @@ public class Joysticks {
     //Aux Joystick controls
 
     public enum Grabber{
-        EJECT, STOPPED, INTAKE
+        EJECT, INTAKE, UP, DOWN, STOPPED
     }
 
     public Grabber getGrabberStatus() {
@@ -60,6 +62,12 @@ public class Joysticks {
         }
         else if (auxStick.getRawButton(kControllerEjectButton)){
             return Grabber.EJECT;
+        }
+        else if (auxStick.getRawAxis(kControllerFlipAxis) > 0){
+            return Grabber.DOWN;
+        }
+        else if (auxStick.getRawAxis(kControllerFlipAxis) < 0){
+            return Grabber.UP;
         }
         else{
             return Grabber.STOPPED;
