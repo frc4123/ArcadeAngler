@@ -73,6 +73,14 @@ public class Elevator {
         currentState = CurrentState.STOPPED;
     }
 
+    private void elevateWithPID(){
+
+    }
+
+    private void descendWithPID(){
+
+    }
+
     private void stop(){
         currentState = CurrentState.STOPPED;
     }
