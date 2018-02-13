@@ -21,6 +21,9 @@ public class Constants {
     public static final double kChassisWheelDiameterInch = 6;
     public static final double kChassisWheelCircumferenceInch = kChassisWheelDiameterInch*Math.PI;
 
+    //TalonSRX's now have multiple PID Loops so we want to select the first one
+    public static final int kPIDLoopIdx = 0;
+
     //Elevator PID parameters
     //TODO Tune these, determine if relevant
     public static final double kElevateP = 0;
@@ -62,8 +65,8 @@ public class Constants {
     public static final int id_intake_limit = 1; //TODO: Find real input ID
 
     //Elevator Speed Controllers
-    public static final int id_elevate_talon_right = 4;
-    public static final int id_eleavte_talon_left = 5;
+    public static final int id_elevateMaster = 4;
+    public static final int id_elevateSlave = 5;
 
 
 }
