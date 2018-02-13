@@ -1,30 +1,33 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import org.frc4123.robot.arcadeangler.Constants;
 
 public class Elevator {
 
-    public enum CurrentState {ELEVATING, DESCENDING, STOPPED}
+    WPI_TalonSRX master = new WPI_TalonSRX(Constants.id_elevateMaster);
+    WPI_TalonSRX slave = new WPI_TalonSRX(Constants.id_elevateSlave);
+
+    public enum CurrentState {ELEVATING, DESCENDING, ELEVATINGPID, DESCENDINGPID, STOPPED}
     private CurrentState currentState = CurrentState.STOPPED;
 
     private float speedElevate;
     private float speedDescend;
 
     /**
-    * @param speedElevate
+    * //@param speedElevate
     *             TODO: define
-    * @param speedDescend
+    * //@param speedDescend
      *             TODO: Define
     * */
-    public Elevator(float speedElevate, float speedDescend){
+    public Elevator(){
         master.set(ControlMode.PercentOutput, 0);
         slave.follow(master);
 
         //Store speeds
-        this.speedElevate = speedElevate;
-        this.speedDescend = speedDescend;
+        //this.speedElevate = speedElevate;
+       // this.speedDescend = speedDescend;
     }
 
     public void SetPID(int P, int I, int D){
@@ -65,7 +68,7 @@ public class Elevator {
 
     private void elevate(){
         currentState = CurrentState.ELEVATING;
-        new
+        new Thread(Runnable)
         currentState = CurrentState.STOPPED;
     }
 
@@ -82,6 +85,8 @@ public class Elevator {
     }
 
     private void stop(){
+        master.set(0);
+        slave.set(0);
         currentState = CurrentState.STOPPED;
     }
 }
