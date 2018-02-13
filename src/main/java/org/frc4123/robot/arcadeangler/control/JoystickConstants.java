@@ -15,9 +15,16 @@ public class JoystickConstants {
     public static final int kXBOX_LJoyPress = 8;
     public static final int kXBOX_RJoyPress = 9;
     //Axis Constants
+    public static final int kXBOX_LJoyX = 0; //Left is negative
+    public static final int kXBOX_LJoyY = 1; //Up is negative
+    public static final int kXBOX_LTrigger = 2; //Only 0 to 1
+    public static final int kXBOX_RTrigger = 3; //Only 0 to 1
+    public static final int kXBOX_RJoyX = 4; //Left is negative
+    public static final int kXBOX_RJoyY = 5; //Up is negative
 
-    //**Logitech Controller**//
+    //**Logitech F310 Game Controller**//
     //Button Constants
+
     //Axis Constants
 
 }
