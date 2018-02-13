@@ -1,39 +1,35 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.Constants;
 
 public class PowerCubeManipulator {
 
-    EjectIntakeSpeedController lManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_left, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeed, Constants.kTimeCubeEject);
-    EjectIntakeSpeedController rManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_right, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeed, Constants.kTimeCubeEject);
-
-    Spark armFlipperMotor = new Spark(Constants.id_grabber_flipper_upper);
+    DoubleSolenoid armOpener = new DoubleSolenoid(2, 3);
+    DoubleSolenoid grabFlipper = new DoubleSolenoid(0, 1);
 
     public void ejectCube(){
-        lManipulatorArm.eject();
-        rManipulatorArm.eject();
+        armOpener.set(DoubleSolenoid.Value.kForward);
     }
 
     public void intakeCube(){
-        lManipulatorArm.intake();
-        rManipulatorArm.intake();
+        armOpener.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public void stopWheels(){
-        lManipulatorArm.stop();
-        rManipulatorArm.stop();
+    public void stopGrabbing(){
+        armOpener.set(DoubleSolenoid.Value.kOff);
     }
 
     public void foldArmsDown(){
-        armFlipperMotor.set(Constants.kFoldArmsDwn);
+        grabFlipper.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void foldArmsUp(){
-        armFlipperMotor.set(Constants.kFoldArmsUp);
+        grabFlipper.set(DoubleSolenoid.Value.kForward);
     }
 
     public void stopFolding(){
-        armFlipperMotor.set(0);
+        grabFlipper.set(DoubleSolenoid.Value.kOff);
     }
 }

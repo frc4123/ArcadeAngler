@@ -31,7 +31,7 @@ public class Joysticks {
     }
 
     public double getTurn() {
-        return -driveStick.getRawAxis(2);
+        return driveStick.getRawAxis(4);
     }
 
     public double getSpeedModifier() {

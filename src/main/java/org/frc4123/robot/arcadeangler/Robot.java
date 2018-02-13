@@ -2,12 +2,11 @@ package org.frc4123.robot.arcadeangler;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
-import org.frc4123.robot.arcadeangler.Constants;
-import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 
 public class Robot extends IterativeRobot {
@@ -29,6 +28,9 @@ public class Robot extends IterativeRobot {
 
     DifferentialDrive mDrive = new DifferentialDrive(left, right);
 
+    //2018 Pneumatics Controller Test
+    Compressor squishyBoi = new Compressor(0);
+
     @Override
     public void robotInit() {
 
@@ -37,6 +39,9 @@ public class Robot extends IterativeRobot {
         l_slave.follow(l_master);
         r_master.set(ControlMode.PercentOutput, 0);
         r_slave.follow(r_master);
+
+        //2018 Pneumatics Additions
+        squishyBoi.setClosedLoopControl(true);
     }
 
     @Override
@@ -82,7 +87,7 @@ public class Robot extends IterativeRobot {
                 break;
             case STOPPED:
                 default:
-                    mPCM.stopWheels();
+                    mPCM.stopGrabbing();
                     mPCM.stopFolding();
                 break;
         }
