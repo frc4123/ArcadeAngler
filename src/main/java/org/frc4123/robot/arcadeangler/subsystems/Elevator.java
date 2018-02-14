@@ -68,7 +68,17 @@ public class Elevator {
 
     private void elevate(){
         currentState = CurrentState.ELEVATING;
-        new Thread(Runnable)
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(!isElevated() && currentState == CurrentState.ELEVATING){
+
+
+                }
+                set(0);
+                currentState = CurrentState.STOPPED;
+            }
+        }).start();
         currentState = CurrentState.STOPPED;
     }
 
@@ -88,5 +98,10 @@ public class Elevator {
         master.set(0);
         slave.set(0);
         currentState = CurrentState.STOPPED;
+    }
+
+    public void isElevated(){
+        //TODO: Fill in with what's really supposed to be there
+        return closedLoopFeedbackSetpointHit;
     }
 }

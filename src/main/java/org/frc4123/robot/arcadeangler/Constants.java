@@ -47,6 +47,7 @@ public class Constants {
 
     //Elevator
     public static final int kElevatorDefaultElevateSpeed = 1;
+    public static final int kElevatorMaxEncPos = 4000;
 
 
     //Robot Ports - These should match up to TODO: create Google doc to outline motor controller ports
