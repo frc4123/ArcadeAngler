@@ -30,9 +30,9 @@ public class Elevator {
 
     public Elevator() {
         master.set(ControlMode.PercentOutput, 0);
-        master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,10);
+        master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
-
+        master.config_IntegralZone(Constants.kPIDLoopIdx, Constants.kIntegralZone, Constants.kTimeoutMs);
         //master.config_kI(Constants.kPIDLoopIdx, 0.0, 10);
 
        // master.configMaxIntegralAccumulator(0, 0, 10);
@@ -40,7 +40,7 @@ public class Elevator {
         //master.setIntegralAccumulator(0, Constants.kPIDLoopIdx, 10);
 
         slave.follow(master);
-
+        
     }
 
     public void setMode(Mode desiredState) {
@@ -86,6 +86,6 @@ public class Elevator {
     }
 
     public boolean hasReachedSetpoint() {
-        return master.getClosedLoopError(Constants.kPIDLoopIdx)<10; //TODO probs a better way of getting if isOnTarget
+        return master.getClosedLoopError(Constants.kPIDLoopIdx) < 10; //TODO probs a better way of getting if isOnTarget
     }
 }
