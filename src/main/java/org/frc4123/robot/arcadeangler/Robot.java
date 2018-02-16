@@ -11,14 +11,20 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    PowerCubeManipulator mPCM = new PowerCubeManipulator();
+    //PowerCubeManipulator mPCM = new PowerCubeManipulator();
     Elevator elevator = new Elevator();
 
     @Override
-    public void robotInit() { }
+    public void robotInit() {
+        System.out.println("Robot.robotInit");
+    }
 
     @Override
-    public void disabledInit() { }
+    public void disabledInit() {
+        System.out.println("Robot.disabledInit");
+
+
+    }
 
     @Override
     public void autonomousInit() { }
@@ -41,13 +47,13 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         //PowerCube Manipulator Commands
-        if (mJoysticks.getGrabberStatus()== Joysticks.Grabber.INTAKE) {
-            mPCM.intakeCube();
-        }else if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.EJECT){
-            mPCM.ejectCube();
-        }else {
-            mPCM.stopWheels();
-        }
+//        if (mJoysticks.getGrabberStatus()== Joysticks.Grabber.INTAKE) {
+//            mPCM.intakeCube();
+//        }else if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.EJECT){
+//            mPCM.ejectCube();
+//        }else {
+//            mPCM.stopWheels();
+//        }
 
         //Elevator
         elevator.setMode(mJoysticks.getElevatorMode());
