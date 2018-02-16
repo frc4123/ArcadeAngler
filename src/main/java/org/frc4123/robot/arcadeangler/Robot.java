@@ -12,7 +12,7 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    PowerCubeManipulator mPCM = new PowerCubeManipulator();
+    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
 
     @Override
     public void robotInit() { }
@@ -40,25 +40,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
 
         //PowerCube Manipulator Commands
-        switch (mJoysticks.getGrabberStatus()){
-            case INTAKE:
-                mPCM.intakeCube();
-                break;
-            case EJECT:
-                mPCM.ejectCube();
-                break;
-            case UP:
-                mPCM.foldArmsUp();
-                break;
-            case DOWN:
-                mPCM.foldArmsDown();
-                break;
-            case STOPPED:
-                default:
-                    mPCM.stopWheels();
-                    mPCM.stopFolding();
-                break;
-        }
+        mPWRCubeMan.setMode(mJoysticks.getCurrentGrabMode());
+
     }
 
     @Override

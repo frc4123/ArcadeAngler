@@ -1,21 +1,13 @@
 package org.frc4123.robot.arcadeangler.control;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.frc4123.robot.arcadeangler.Constants;
+import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 
 public class Joysticks {
 
     private final Joystick driveStick;
     private final Joystick auxStick;
-
-    //A Button - Logitech
-    private static final int kControllerIntakeButton = 1;
-    //B Button - Logitech
-    private static final int kControllerEjectButton = 2;
-    //Left Joystick - Logitech
-    private static final int kControllerElevateAxis = 2;
-    //Right Joystick - Logitech
-    private static final int kControllerFlipAxis = 6;
-
 
     //Constructor
     public Joysticks() {
@@ -52,42 +44,27 @@ public class Joysticks {
 
     //Aux Joystick controls
 
-    public enum Grabber{
-        EJECT, INTAKE, UP, DOWN, STOPPED
-    }
-
-    public Grabber getGrabberStatus() {
-        if (auxStick.getRawButton(kControllerIntakeButton)){
-            return Grabber.INTAKE;
+    private PowerCubeManipulator.Mode currentGrabMode = PowerCubeManipulator.Mode.STOPALL;
+    public PowerCubeManipulator.Mode getCurrentGrabMode(){
+        if (auxStick.getRawButton(JoystickConstants.kF310_LBump)){
+            currentGrabMode = PowerCubeManipulator.Mode.EJECT;
         }
-        else if (auxStick.getRawButton(kControllerEjectButton)){
-            return Grabber.EJECT;
+        else if (auxStick.getRawButton(JoystickConstants.kF310_RBump)){
+            currentGrabMode = PowerCubeManipulator.Mode.INTAKE;
         }
-        else if (auxStick.getRawAxis(kControllerFlipAxis) > 0){
-            return Grabber.DOWN;
+        else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) < -Constants.kJoyNeutralZone){
+            currentGrabMode = PowerCubeManipulator.Mode.FOLDUP;
         }
-        else if (auxStick.getRawAxis(kControllerFlipAxis) < 0){
-            return Grabber.UP;
+        else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) > Constants.kJoyNeutralZone){
+            currentGrabMode = PowerCubeManipulator.Mode.FOLDDOWN;
         }
-        else{
-            return Grabber.STOPPED;
-        }
-    }
-
-    public enum Elevator{
-        UP, DOWN, STOPPED
-    }
-
-    public Elevator getElevatorStatus() {
-        if (auxStick.getRawAxis(kControllerElevateAxis) > 0){
-            return Elevator.DOWN;
-        }
-        else if (auxStick.getRawAxis(kControllerElevateAxis) < 0){
-            return Elevator.UP;
+        else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) <= Constants.kJoyNeutralZone && auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) >= -Constants.kJoyNeutralZone){
+            currentGrabMode = PowerCubeManipulator.Mode.FOLDDOWN;
         }
         else{
-            return Elevator.STOPPED;
+            currentGrabMode = PowerCubeManipulator.Mode.STOPALL;
         }
+        return currentGrabMode;
     }
 
     public boolean setHeadingPIDFromSmartDashboard() {

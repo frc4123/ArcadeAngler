@@ -10,6 +10,42 @@ public class PowerCubeManipulator {
 
     Spark armFlipperMotor = new Spark(Constants.id_grabber_flipper_upper);
 
+    public enum Mode {
+        EJECT, INTAKE, FOLDUP, FOLDDOWN, STOPINTAKE, STOPFOLD, STOPALL
+    }
+
+    private Mode mode = Mode.STOPALL;
+
+    public void setMode(Mode desiredState) {
+        this.mode = desiredState;
+
+        switch (mode) {
+            case EJECT:
+                ejectCube();
+                break;
+            case INTAKE:
+                intakeCube();
+                break;
+            case FOLDUP:
+                foldArmsUp();
+                break;
+            case FOLDDOWN:
+                foldArmsDown();
+                break;
+            case STOPINTAKE:
+                stopWheels();
+                break;
+            case STOPFOLD:
+                stopFolding();
+                break;
+            default:
+                case STOPALL:
+                stopWheels();
+                stopFolding();
+                break;
+        }
+    }
+
     public void ejectCube(){
         lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.EJECTING);
         rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.EJECTING);
