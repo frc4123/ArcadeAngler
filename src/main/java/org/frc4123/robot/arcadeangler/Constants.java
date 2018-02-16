@@ -15,6 +15,7 @@ public class Constants {
     public static final float kIntakeCubeSpeed = -1;
     public static final float kFoldArmsUp = 1;
     public static final float kFoldArmsDwn = -1;
+    public static final double kJoyNeutralZone = 0.5;
 
     //Climber Constants
     public static final float kClimberUpSpeed = -1;
