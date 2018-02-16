@@ -42,13 +42,13 @@ public class JoystickConstants {
     public static final int kF310_Start = 8;
     public static final int kF310_LJoyPress = 9;
     public static final int kF310_RJoyPress = 10;
-    //Axis Constants - Verified on DeepWater/Scrappy project bot
-    public static final int kF310_LJoyX = 1; //Left is negative
-    public static final int kF310_LJoyY = 2; //Up is negative
-    public static final int kF310_LTrigger = 3; //Only 0 to 1
-    public static final int kF310_RTrigger = 4; //Only 0 to 1
-    public static final int kF310_RJoyX = 5; //Left is negative
-    public static final int kF310_RJoyY = 6; //Up is negative
+    //Axis Constants - Verified on ArcadeAngler
+    public static final int kF310_LJoyX = 0; //Left is negative
+    public static final int kF310_LJoyY = 1; //Up is negative
+    public static final int kF310_LTrigger = 2; //Only 0 to 1
+    public static final int kF310_RTrigger = 3; //Only 0 to 1
+    public static final int kF310_RJoyX = 4; //Left is negative
+    public static final int kF310_RJoyY = 5; //Up is negative
 
     //**Logitech Extreme 3D (Flight Sim Joystick)**//
     //All values verified on BassSteel with Eclipse project 2018MotionProfileTest
