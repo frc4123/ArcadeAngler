@@ -2,8 +2,7 @@ package org.frc4123.robot.arcadeangler;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
-import org.frc4123.robot.arcadeangler.Constants;
-import edu.wpi.first.wpilibj.Spark;
+import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 
 public class Robot extends IterativeRobot {
@@ -13,6 +12,7 @@ public class Robot extends IterativeRobot {
 
     //Subsystems
     PowerCubeManipulator mPCM = new PowerCubeManipulator();
+    Elevator elevator = new Elevator();
 
     @Override
     public void robotInit() { }
@@ -31,7 +31,9 @@ public class Robot extends IterativeRobot {
 
 
     @Override
-    public void disabledPeriodic() { }
+    public void disabledPeriodic() {
+        elevator.stop();
+    }
     
     @Override
     public void autonomousPeriodic() { }
@@ -46,6 +48,11 @@ public class Robot extends IterativeRobot {
         }else {
             mPCM.stopWheels();
         }
+
+        //Elevator
+        elevator.setMode(mJoysticks.getElevatorMode());
+        elevator.set(mJoysticks.getElevatorThrottle());
+
     }
 
     @Override
