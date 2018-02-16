@@ -1,6 +1,7 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import org.frc4123.robot.arcadeangler.Constants;
 
@@ -9,99 +10,82 @@ public class Elevator {
     WPI_TalonSRX master = new WPI_TalonSRX(Constants.id_elevateMaster);
     WPI_TalonSRX slave = new WPI_TalonSRX(Constants.id_elevateSlave);
 
-    public enum CurrentState {ELEVATING, DESCENDING, ELEVATINGPID, DESCENDINGPID, STOPPED}
-    private CurrentState currentState = CurrentState.STOPPED;
+    public enum Mode {
+        MANUAL(0), HIGH(Constants.kElevatorHigh), MEDIUM(Constants.kElevatorMedium), LOW(Constants.kElevatorLow);
 
-    private float speedElevate;
-    private float speedDescend;
+        private double position;
 
-    /**
-    * //@param speedElevate
-    *             TODO: define
-    * //@param speedDescend
-     *             TODO: Define
-    * */
-    public Elevator(){
-        master.set(ControlMode.PercentOutput, 0);
-        slave.follow(master);
+        Mode(double position) {
+            this.position = position;
+        }
 
-        //Store speeds
-        //this.speedElevate = speedElevate;
-       // this.speedDescend = speedDescend;
-    }
 
-    public void SetPID(int P, int I, int D){
-
-    }
-
-    public void setCurrentState(CurrentState desiredState) {
-        if (desiredState != this.currentState){
-            this.currentState = desiredState;
-            switch(desiredState){
-                case ELEVATING:
-                    elevate();
-                    break;
-
-                case DESCENDING:
-                    descend();
-                    break;
-
-                case ELEVATINGPID:
-                    elevateWithPID();
-                    break;
-
-                case DESCENDINGPID:
-                    descendWithPID();
-                    break;
-
-                case STOPPED:
-                    stop();
-                    break;
-
-                default:
-                    stop();
-                    break;
-
-            }
+        public double getPosition() {
+            return position;
         }
     }
 
-    private void elevate(){
-        currentState = CurrentState.ELEVATING;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(!isElevated() && currentState == CurrentState.ELEVATING){
+    private Mode mode = Mode.MANUAL;
 
 
-                }
-                set(0);
-                currentState = CurrentState.STOPPED;
-            }
-        }).start();
-        currentState = CurrentState.STOPPED;
-    }
+    public Elevator() {
+        master.set(ControlMode.PercentOutput, 0);
+        master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx,10);
 
-    private void descend(){
-        currentState = CurrentState.STOPPED;
-    }
 
-    private void elevateWithPID(){
+        //master.config_kI(Constants.kPIDLoopIdx, 0.0, 10);
+
+       // master.configMaxIntegralAccumulator(0, 0, 10);
+        //master.configAllowableClosedloopError(Constants.kPIDLoopIdx, 0, 10);
+        //master.setIntegralAccumulator(0, Constants.kPIDLoopIdx, 10);
+
+        slave.follow(master);
 
     }
 
-    private void descendWithPID(){
+    public void setMode(Mode desiredState) {
+        this.mode = desiredState;
 
+        switch (mode) {
+            case MANUAL:
+                break;
+            case HIGH: case MEDIUM: case LOW:
+
+                master.set(ControlMode.Position, desiredState.getPosition());
+                break;
+            default:
+                stop();
+                break;
+        }
     }
 
-    private void stop(){
-        master.set(0);
-        slave.set(0);
-        currentState = CurrentState.STOPPED;
+    /**
+     * Sets the speed controler's mode to {@link ControlMode#PercentOutput} only if in MANUAL mode and speed to speed
+     * @param speed between -1.0 and 1.0, with 0.0 as stopped.
+     */
+    public void set(double speed) {
+        System.out.println("passedspeed = " + speed);
+        System.out.println("currentspeed = " + master.getClosedLoopError(0));
+        System.out.println("mode = " + mode);
+        System.out.println("master.getClosedLoopError() = " + master.getClosedLoopError(Constants.kPIDLoopIdx));
+        System.out.println("master.getIntegralAccumulator() = " + master.getIntegralAccumulator(Constants.kPIDLoopIdx));
+//        System.out.println("i term = " + master.getT);
+        if (mode == Mode.MANUAL) {
+            System.out.println("manual mode");
+            master.set(ControlMode.PercentOutput, speed);
+        }
     }
 
-    public void isElevated(){
-        //TODO: Fill in with what's really supposed to be there
-        return closedLoopFeedbackSetpointHit;
+    public void stop() {
+        setMode(Mode.MANUAL);
+        master.set(ControlMode.PercentOutput,0); //TODO maybe ControlMode.Disabled?
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public boolean hasReachedSetpoint() {
+        return master.getClosedLoopError(Constants.kPIDLoopIdx)<10; //TODO probs a better way of getting if isOnTarget
     }
 }
