@@ -1,6 +1,7 @@
 package org.frc4123.robot.arcadeangler.control;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Joysticks {
 
@@ -66,19 +67,29 @@ public class Joysticks {
         }
     }
 
-    public enum Elevator{
-        UP, DOWN, STOPPED
-    }
+    private Elevator.Mode currentMode = Elevator.Mode.MANUAL;
+    public Elevator.Mode getElevatorMode() {
 
-    public Elevator getElevatorStatus() {
-        if (auxStick.getRawAxis(kControllerElevateAxis) > 0){
-            return Elevator.DOWN;
+        if (auxStick.getPOV() != -1) {
+            currentMode = Elevator.Mode.MANUAL;
+        }else if (auxStick.getRawButton(JoystickConstants.kF310_Y)) {
+            currentMode = Elevator.Mode.HIGH;
+        }else if (auxStick.getRawButton(JoystickConstants.kF310_B)) {
+            currentMode = Elevator.Mode.MEDIUM;
+        }else if (auxStick.getRawButton(JoystickConstants.kF310_A)) {
+            currentMode = Elevator.Mode.LOW;
         }
-        else if (auxStick.getRawAxis(kControllerElevateAxis) < 0){
-            return Elevator.UP;
-        }
-        else{
-            return Elevator.STOPPED;
+
+        return currentMode;
+    }
+    public double getElevatorThrottle() {
+        switch (auxStick.getPOV()) {
+            case 0:
+                return 1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger); //TODO times a speed coeff
+            case 180:
+                return -1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger); //TODO times a speed coeff
+            default:
+                return 0;
         }
     }
 
