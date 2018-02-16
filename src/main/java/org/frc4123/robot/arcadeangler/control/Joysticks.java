@@ -82,12 +82,19 @@ public class Joysticks {
 
         return currentMode;
     }
+
+    /**
+     * A double to give elevator.set a speed in MANUAL mode
+     * @return  If POV "up" selected, return 1 * the position of the left Joystick Trigger
+     *          If POV "down" selected, return -1 * the position of the left Joystick Trigger
+     *          Default return is 0.
+     */
     public double getElevatorThrottle() {
         switch (auxStick.getPOV()) {
             case 0:
-                return 1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger); //TODO times a speed coeff
+                return 1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger);
             case 180:
-                return -1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger); //TODO times a speed coeff
+                return -1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger);
             default:
                 return 0;
         }
