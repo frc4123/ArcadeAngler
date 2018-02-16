@@ -3,6 +3,7 @@ package org.frc4123.robot.arcadeangler;
 public class Constants {
 
     //TODO: Check all these values. Will be a progressive task
+    //TODO: Clean up all of these - organize by object/subsystem
 
     public static final int kTimeCubeEject = 2; //In seconds Todo: Hopefully...
 
@@ -23,9 +24,10 @@ public class Constants {
 
     //TalonSRX's now have multiple PID Loops so we want to select the first one
     public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 10;
 
     //Elevator PID parameters
-    //TODO Tune these, determine if relevant
+    //TODO Tune these
     public static final double kElevateP = 0;
     public static final double kElevateI = 0;
     public static final double kElevateD = 0;
@@ -46,11 +48,13 @@ public class Constants {
     public static final double kHeadingClosedLoop_Tolerance_Default = 1;
 
     //Elevator
-    public static final int kElevatorDefaultElevateSpeed = 1;
+    //public static final int kElevatorDefaultElevateSpeed = 1; TODO Possibly unneeded
     public static final int kElevatorMaxEncPos = 4000;
     public static final int kElevatorHigh = 25000;
     public static final int kElevatorMedium = 16000;
     public static final int kElevatorLow = 3;
+    public static final int kIntegralZone = 700;
+    public static final int id_descend_limit = 2; //TODO: Find real input number
 
 
     //Robot Ports - These should match up to TODO: create Google doc to outline motor controller ports
@@ -65,6 +69,7 @@ public class Constants {
     //PowerCube Manipulator Speed Controllers
     public static final int id_grabber_wheel_left = 1;
     public static final int id_grabber_wheel_right = 0;
+
     //PowerCube Grabber Limit Switch
     public static final int id_intake_limit = 1; //TODO: Find real input ID
 
