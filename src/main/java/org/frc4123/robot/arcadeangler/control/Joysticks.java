@@ -21,11 +21,11 @@ public class Joysticks {
 
     //Driver Joystick controls
     public double getThrottle() {
-        return -driveStick.getRawAxis(1);
+        return -driveStick.getRawAxis(JoystickConstants.kXBOX_LJoyY);
     }
 
     public double getTurn() {
-        return -driveStick.getRawAxis(2);
+        return driveStick.getRawAxis(JoystickConstants.kF310_RJoyX);
     }
 
     public double getSpeedModifier() {
