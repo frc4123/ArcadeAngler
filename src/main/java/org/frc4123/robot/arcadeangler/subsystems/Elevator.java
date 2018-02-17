@@ -107,6 +107,6 @@ public class Elevator {
     }
 
     public boolean hasReachedSetpoint() {
-        return master.getClosedLoopError(Constants.kPIDLoopIdx) < 10; //TODO probs a better way of getting if isOnTarget
+        return master.getClosedLoopError(Constants.kPIDLoopIdx) < Constants.kElevateAllowableError; //TODO probs a better way of getting if isOnTarget
     }
 }

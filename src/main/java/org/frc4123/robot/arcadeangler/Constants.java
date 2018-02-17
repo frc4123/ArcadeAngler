@@ -57,6 +57,7 @@ public class Constants {
     public static final int id_descend_limit = 2; //TODO: Find real input number
     public static final int kElevateMaxPos = 30000;
     public static final int kDescendMaxPos = 30000;
+    public static final int kElevateAllowableError = 10;
 
 
     //Robot Ports - These should match up to TODO: create Google doc to outline motor controller ports

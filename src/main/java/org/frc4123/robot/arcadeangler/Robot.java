@@ -57,7 +57,6 @@ public class Robot extends IterativeRobot {
         //Elevator
         elevator.setMode(mJoysticks.getElevatorMode());
         elevator.set(mJoysticks.getElevatorThrottle());
-
         if (elevator.getDescendLimitSW()){
             elevator.resetEncoder();
         }
