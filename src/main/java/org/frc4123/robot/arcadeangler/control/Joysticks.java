@@ -48,7 +48,7 @@ public class Joysticks {
 
     //Grabber
     public double getFlipperUpperSpeed(){
-        return auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
+        return -auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
     }
 
     public double getIntakeSpeed(){
