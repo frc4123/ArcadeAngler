@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
-import org.frc4123.robot.arcadeangler.Constants;
-import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
@@ -18,7 +16,7 @@ public class Robot extends IterativeRobot {
 
     //Subsystems
     PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
-    Elevator elevator = new Elevator();
+    Elevator mElevator = new Elevator();
 
     //Drive
     WPI_TalonSRX l_master = new WPI_TalonSRX(Constants.id_driveLeftMaster);
@@ -60,7 +58,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledPeriodic() {
-        elevator.stop();
+        mElevator.stop();
     }
     
     @Override
@@ -76,10 +74,10 @@ public class Robot extends IterativeRobot {
         mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
 
         //Elevator
-        elevator.setMode(mJoysticks.getElevatorMode());
-        elevator.set(mJoysticks.getElevatorThrottle());
-        if (elevator.getDescendLimitSW()){
-            elevator.resetEncoder();
+        mElevator.setMode(mJoysticks.getElevatorMode());
+        mElevator.set(mJoysticks.getElevatorThrottle());
+        if (mElevator.getDescendLimitSW()){
+            mElevator.resetEncoder();
         }
 
     }
