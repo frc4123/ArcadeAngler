@@ -1,5 +1,6 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
+
 import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.Constants;
 
@@ -30,5 +31,6 @@ public class PowerCubeManipulator {
     public void stopAll(){
         stopWheels();
         stopFolding();
+
     }
 }

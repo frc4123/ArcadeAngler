@@ -5,6 +5,7 @@ import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.Constants;
 import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
+import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
 
@@ -13,12 +14,19 @@ public class Robot extends IterativeRobot {
 
     //Subsystems
     PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
+    Elevator elevator = new Elevator();
 
     @Override
-    public void robotInit() { }
+    public void robotInit() {
+        System.out.println("Robot.robotInit");
+    }
 
     @Override
-    public void disabledInit() { }
+    public void disabledInit() {
+        System.out.println("Robot.disabledInit");
+
+
+    }
 
     @Override
     public void autonomousInit() { }
@@ -31,7 +39,9 @@ public class Robot extends IterativeRobot {
 
 
     @Override
-    public void disabledPeriodic() { }
+    public void disabledPeriodic() {
+        elevator.stop();
+    }
     
     @Override
     public void autonomousPeriodic() { }
@@ -42,6 +52,13 @@ public class Robot extends IterativeRobot {
         //PowerCube Manipulator Commands
         mPWRCubeMan.setIntakeSpeed(mJoysticks.getIntakeSpeed());
         mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
+
+        //Elevator
+        elevator.setMode(mJoysticks.getElevatorMode());
+        elevator.set(mJoysticks.getElevatorThrottle());
+        if (elevator.getDescendLimitSW()){
+            elevator.resetEncoder();
+        }
 
     }
 

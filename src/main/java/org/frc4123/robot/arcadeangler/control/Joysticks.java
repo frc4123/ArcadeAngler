@@ -3,6 +3,8 @@ package org.frc4123.robot.arcadeangler.control;
 import edu.wpi.first.wpilibj.Joystick;
 import org.frc4123.robot.arcadeangler.Constants;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
+import org.frc4123.robot.arcadeangler.subsystems.Elevator;
+
 
 public class Joysticks {
 
@@ -44,12 +46,47 @@ public class Joysticks {
 
     //Aux Joystick controls
 
+    //Grabber
     public double getFlipperUpperSpeed(){
         return auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
     }
 
     public double getIntakeSpeed(){
         return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
+    }
+    
+    //Elevator
+    private Elevator.Mode currentMode = Elevator.Mode.MANUAL;
+    public Elevator.Mode getElevatorMode() {
+
+        if (auxStick.getPOV() != -1) {
+            currentMode = Elevator.Mode.MANUAL;
+        }else if (auxStick.getRawButton(JoystickConstants.kF310_Y)) {
+            currentMode = Elevator.Mode.HIGH;
+        }else if (auxStick.getRawButton(JoystickConstants.kF310_B)) {
+            currentMode = Elevator.Mode.MEDIUM;
+        }else if (auxStick.getRawButton(JoystickConstants.kF310_A)) {
+            currentMode = Elevator.Mode.LOW;
+        }
+
+        return currentMode;
+    }
+
+    /**
+     * A double to give elevator.set a speed in MANUAL mode
+     * @return  If POV "up" selected, return 1 * the position of the left Joystick Trigger
+     *          If POV "down" selected, return -1 * the position of the left Joystick Trigger
+     *          Default return is 0.
+     */
+    public double getElevatorThrottle() {
+        switch (auxStick.getPOV()) {
+            case 0:
+                return 1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger);
+            case 180:
+                return -1 * auxStick.getRawAxis(JoystickConstants.kF310_LTrigger);
+            default:
+                return 0;
+        }
     }
 
     public boolean setHeadingPIDFromSmartDashboard() {
