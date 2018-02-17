@@ -3,7 +3,6 @@ package org.frc4123.robot.arcadeangler;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
-import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 
 public class Robot extends IterativeRobot {
 
@@ -59,7 +58,7 @@ public class Robot extends IterativeRobot {
         elevator.setMode(mJoysticks.getElevatorMode());
         elevator.set(mJoysticks.getElevatorThrottle());
 
-        if (elevator.getDescendLimit()){
+        if (elevator.getDescendLimitSW()){
             elevator.resetEncoder();
         }
 

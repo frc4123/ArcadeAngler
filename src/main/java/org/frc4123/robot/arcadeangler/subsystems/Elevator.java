@@ -89,7 +89,7 @@ public class Elevator {
         master.set(ControlMode.PercentOutput,0); //TODO maybe ControlMode.Disabled?
     }
 
-    public boolean getDescendLimit() {
+    public boolean getDescendLimitSW() {
         if (descendLimit.get()){
             isDescended = true;
         }else {
