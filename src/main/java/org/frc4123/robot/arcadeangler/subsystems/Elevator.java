@@ -37,13 +37,15 @@ public class Elevator {
         master.set(ControlMode.PercentOutput, 0);
         master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
-        master.config_IntegralZone(Constants.kPIDLoopIdx, Constants.kIntegralZone, Constants.kTimeoutMs);
+        //master.config_IntegralZone(Constants.kPIDLoopIdx, Constants.kIntegralZone, Constants.kTimeoutMs);
         //master.config_kI(Constants.kPIDLoopIdx, 0.0, 10);
-
+        //master.configForwardSoftLimitThreshold(Constants.kElevateMaxPos, Constants.kTimeoutMs);
+        //master.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
        // master.configMaxIntegralAccumulator(0, 0, 10);
-        //master.configAllowableClosedloopError(Constants.kPIDLoopIdx, 0, 10);
+        master.configAllowableClosedloopError(Constants.kPIDLoopIdx, 100, 10);
         //master.setIntegralAccumulator(0, Constants.kPIDLoopIdx, 10);
 
+        master.configOpenloopRamp(0, 0);
         slave.follow(master);
         
     }
@@ -74,6 +76,7 @@ public class Elevator {
         System.out.println("mode = " + mode);
         System.out.println("master.getClosedLoopError() = " + master.getClosedLoopError(Constants.kPIDLoopIdx));
         System.out.println("master.getIntegralAccumulator() = " + master.getIntegralAccumulator(Constants.kPIDLoopIdx));
+        System.out.println("master.configGetParameter(ParamEnum.eProfileParamSlot_I, 0,10) = " + master.configGetParameter(ParamEnum.eProfileParamSlot_I, 0,10));
 //        System.out.println("i term = " + master.getT);
         if (mode == Mode.MANUAL) {
             System.out.println("manual mode");
