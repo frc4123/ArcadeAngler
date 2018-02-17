@@ -93,6 +93,9 @@ public class Joysticks {
         return driveStick.getRawButton(7);
     }
 
+    public void disabledPeriodic() {
+        currentMode = Elevator.Mode.MANUAL;
+    }
 }
 
 

@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledPeriodic() {
         mElevator.stop();
+        mJoysticks.disabledPeriodic();
     }
     
     @Override
@@ -73,6 +74,7 @@ public class Robot extends IterativeRobot {
         //Elevator
         mElevator.setMode(mJoysticks.getElevatorMode());
         mElevator.set(mJoysticks.getElevatorThrottle());
+        System.out.println("mElevator.getDescendLimitSW() = " + mElevator.getDescendLimitSW());
         if (mElevator.getDescendLimitSW()){
             mElevator.resetEncoder();
         }
