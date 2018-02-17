@@ -1,14 +1,19 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
 import org.frc4123.robot.arcadeangler.Constants;
 
 public class Elevator {
 
     WPI_TalonSRX master = new WPI_TalonSRX(Constants.id_elevateMaster);
     WPI_TalonSRX slave = new WPI_TalonSRX(Constants.id_elevateSlave);
+
+    DigitalInput descendLimit = new DigitalInput(Constants.id_descend_limit);
+    boolean isDescended = false;
 
     public enum Mode {
         MANUAL(0), HIGH(Constants.kElevatorHigh), MEDIUM(Constants.kElevatorMedium), LOW(Constants.kElevatorLow);
@@ -79,6 +84,19 @@ public class Elevator {
     public void stop() {
         setMode(Mode.MANUAL);
         master.set(ControlMode.PercentOutput,0); //TODO maybe ControlMode.Disabled?
+    }
+
+    public boolean getDescendLimit() {
+        if (descendLimit.get()){
+            isDescended = true;
+        }else {
+            isDescended = false;
+        }
+        return isDescended;
+    }
+
+    public void resetEncoder() {
+        master.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
     }
 
     public Mode getMode() {
