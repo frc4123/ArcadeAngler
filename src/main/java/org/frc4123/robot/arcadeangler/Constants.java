@@ -7,8 +7,6 @@ public class Constants {
 
     public static final int kTimeCubeEject = 2; //In seconds Todo: Hopefully...
 
-    public static final int kTimeCubeEject = 2; //In seconds Todo: Hopefully...
-
     /***********AUTO***********/
 
     /**********TELEOP**********/
@@ -77,9 +75,6 @@ public class Constants {
     //PowerCube Manipulator Speed Controllers
     public static final int id_grabber_wheels = 1;
     public static final int id_grabber_flipper_upper = 0;
-    //PowerCube Grabber Limit Switch
-    public static final int id_intake_limit = 1; //TODO: Find real input ID
-
     //PowerCube Grabber Limit Switch
     public static final int id_intake_limit = 1; //TODO: Find real input ID
 
