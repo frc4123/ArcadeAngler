@@ -1,20 +1,15 @@
 package org.frc4123.robot.arcadeangler.control;
 
 import edu.wpi.first.wpilibj.Joystick;
+import org.frc4123.robot.arcadeangler.Constants;
+import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
+
 
 public class Joysticks {
 
     private final Joystick driveStick;
     private final Joystick auxStick;
-
-    //A Button - Logitech
-    private static final int kControllerIntakeButton = 1;
-    //B Button - Logitech
-    private static final int kControllerEjectButton = 2;
-    //Left Joystick - Logitech
-    private static final int kControllerElevateAxis = 2;
-
 
     //Constructor
     public Joysticks() {
@@ -51,22 +46,16 @@ public class Joysticks {
 
     //Aux Joystick controls
 
-    public enum Grabber{
-        EJECT, STOPPED, INTAKE
+    //Grabber
+    public double getFlipperUpperSpeed(){
+        return auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
     }
 
-    public Grabber getGrabberStatus() {
-        if (auxStick.getRawButton(kControllerIntakeButton)){
-            return Grabber.INTAKE;
-        }
-        else if (auxStick.getRawButton(kControllerEjectButton)){
-            return Grabber.EJECT;
-        }
-        else{
-            return Grabber.STOPPED;
-        }
+    public double getIntakeSpeed(){
+        return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
     }
-
+    
+    //Elevator
     private Elevator.Mode currentMode = Elevator.Mode.MANUAL;
     public Elevator.Mode getElevatorMode() {
 

@@ -7,13 +7,17 @@ public class Constants {
 
     public static final int kTimeCubeEject = 2; //In seconds Todo: Hopefully...
 
+    public static final int kTimeCubeEject = 2; //In seconds Todo: Hopefully...
+
     /***********AUTO***********/
 
     /**********TELEOP**********/
 
     //PowerCube Manipulator Constants
-    public static final float kEjectCubeSpeed = 1;
-    public static final float kIntakeCubeSpeed = -1;
+    public static final float kEjectCubeSpeedMod = 1;
+    public static final float kFoldArmsUp = 1;
+    public static final float kFoldArmsDwn = -1;
+    public static final double kJoyNeutralZone = 0.5;
 
     //Climber Constants
     public static final float kClimberUpSpeed = -1;
@@ -48,6 +52,7 @@ public class Constants {
     public static final double kHeadingClosedLoop_Tolerance_Default = 1;
 
     //Elevator
+
     //public static final int kElevatorDefaultElevateSpeed = 1; TODO Possibly unneeded
     public static final int kElevatorMaxEncPos = 4000;
     public static final int kElevatorHigh = 25000;
@@ -58,7 +63,7 @@ public class Constants {
     public static final int kElevateMaxPos = 30000;
     public static final int kDescendMaxPos = 30000;
     public static final int kElevateAllowableError = 10;
-
+  
 
     //Robot Ports - These should match up to TODO: create Google doc to outline motor controller ports
 
@@ -70,8 +75,10 @@ public class Constants {
 
     //TODO: Set these to reality once the electronics is laid out. Sparks?
     //PowerCube Manipulator Speed Controllers
-    public static final int id_grabber_wheel_left = 1;
-    public static final int id_grabber_wheel_right = 0;
+    public static final int id_grabber_wheels = 1;
+    public static final int id_grabber_flipper_upper = 0;
+    //PowerCube Grabber Limit Switch
+    public static final int id_intake_limit = 1; //TODO: Find real input ID
 
     //PowerCube Grabber Limit Switch
     public static final int id_intake_limit = 1; //TODO: Find real input ID

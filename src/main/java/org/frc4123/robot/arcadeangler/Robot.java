@@ -2,6 +2,9 @@ package org.frc4123.robot.arcadeangler;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
+import org.frc4123.robot.arcadeangler.Constants;
+import edu.wpi.first.wpilibj.Spark;
+import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
@@ -10,7 +13,7 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    //PowerCubeManipulator mPCM = new PowerCubeManipulator();
+    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
     Elevator elevator = new Elevator();
 
     @Override
@@ -45,14 +48,10 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopPeriodic() {
+
         //PowerCube Manipulator Commands
-//        if (mJoysticks.getGrabberStatus()== Joysticks.Grabber.INTAKE) {
-//            mPCM.intakeCube();
-//        }else if (mJoysticks.getGrabberStatus() == Joysticks.Grabber.EJECT){
-//            mPCM.ejectCube();
-//        }else {
-//            mPCM.stopWheels();
-//        }
+        mPWRCubeMan.setIntakeSpeed(mJoysticks.getIntakeSpeed());
+        mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
 
         //Elevator
         elevator.setMode(mJoysticks.getElevatorMode());
