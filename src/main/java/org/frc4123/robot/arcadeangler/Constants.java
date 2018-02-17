@@ -30,9 +30,9 @@ public class Constants {
 
     //Elevator PID parameters
     //TODO Tune these
-    public static final double kElevateP = 0;
+    public static final double kElevateP = 1;
     public static final double kElevateI = 0;
-    public static final double kElevateD = 0;
+    public static final double kElevateD = 45;
 
     //Drive Chassis PID parameters
     //TODO Tune these
@@ -53,7 +53,7 @@ public class Constants {
 
     //public static final int kElevatorDefaultElevateSpeed = 1; TODO Possibly unneeded
     public static final int kElevatorMaxEncPos = 4000;
-    public static final int kElevatorHigh = 25000;
+    public static final int kElevatorHigh = 32000;
     public static final int kElevatorMedium = 16000;
     public static final int kElevatorLow = 3;
     public static final int kIntegralZone = 700;

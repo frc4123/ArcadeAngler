@@ -38,14 +38,16 @@ public class Elevator {
         master.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
         //master.config_IntegralZone(Constants.kPIDLoopIdx, Constants.kIntegralZone, Constants.kTimeoutMs);
-        //master.config_kI(Constants.kPIDLoopIdx, 0.0, 10);
+        master.config_kP(Constants.kPIDLoopIdx, Constants.kElevateP, Constants.kTimeoutMs);
+        master.config_kI(Constants.kPIDLoopIdx, Constants.kElevateI, Constants.kTimeoutMs);
+        master.config_kD(Constants.kPIDLoopIdx, Constants.kElevateD, Constants.kTimeoutMs);
         //master.configForwardSoftLimitThreshold(Constants.kElevateMaxPos, Constants.kTimeoutMs);
         //master.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
        // master.configMaxIntegralAccumulator(0, 0, 10);
         master.configAllowableClosedloopError(Constants.kPIDLoopIdx, 100, 10);
         //master.setIntegralAccumulator(0, Constants.kPIDLoopIdx, 10);
 
-        master.configOpenloopRamp(0, 0);
+        master.configOpenloopRamp(0.5, 0);
         slave.follow(master);
         
     }
