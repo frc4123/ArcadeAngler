@@ -44,27 +44,12 @@ public class Joysticks {
 
     //Aux Joystick controls
 
-    private PowerCubeManipulator.Mode currentGrabMode = PowerCubeManipulator.Mode.STOPALL;
-    public PowerCubeManipulator.Mode getCurrentGrabMode(){
-        if (auxStick.getRawButton(JoystickConstants.kF310_LBump)){
-            currentGrabMode = PowerCubeManipulator.Mode.EJECT;
-        }
-        else if (auxStick.getRawButton(JoystickConstants.kF310_RBump)){
-            currentGrabMode = PowerCubeManipulator.Mode.INTAKE;
-        }
-        else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) < -Constants.kJoyNeutralZone){
-            currentGrabMode = PowerCubeManipulator.Mode.FOLDUP;
-        }
-        else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) > Constants.kJoyNeutralZone){
-            currentGrabMode = PowerCubeManipulator.Mode.FOLDDOWN;
-        }
-        else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) <= Constants.kJoyNeutralZone && auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) >= -Constants.kJoyNeutralZone){
-            currentGrabMode = PowerCubeManipulator.Mode.FOLDDOWN;
-        }
-        else{
-            currentGrabMode = PowerCubeManipulator.Mode.STOPALL;
-        }
-        return currentGrabMode;
+    public double getFlipperUpperSpeed(){
+        return auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
+    }
+
+    public double getIntakeSpeed(){
+        return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
     }
 
     public boolean setHeadingPIDFromSmartDashboard() {

@@ -5,71 +5,30 @@ import org.frc4123.robot.arcadeangler.Constants;
 
 public class PowerCubeManipulator {
 
-    EjectIntakeSpeedController lManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_left, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeed, Constants.kTimeCubeEject);
-    EjectIntakeSpeedController rManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_right, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeed, Constants.kTimeCubeEject);
+//    EjectIntakeSpeedController lManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_left, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeedMod, Constants.kTimeCubeEject);
+//    EjectIntakeSpeedController rManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_right, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeedMod, Constants.kTimeCubeEject);
 
     Spark armFlipperMotor = new Spark(Constants.id_grabber_flipper_upper);
+    Spark armWheels = new Spark(Constants.id_grabber_wheels);
 
-    public enum Mode {
-        EJECT, INTAKE, FOLDUP, FOLDDOWN, STOPINTAKE, STOPFOLD, STOPALL
+    public void setFlipperUpperSpeed(double speed) {
+        armFlipperMotor.set(speed);
     }
 
-    private Mode mode = Mode.STOPALL;
-
-    public void setMode(Mode desiredState) {
-        this.mode = desiredState;
-
-        switch (mode) {
-            case EJECT:
-                ejectCube();
-                break;
-            case INTAKE:
-                intakeCube();
-                break;
-            case FOLDUP:
-                foldArmsUp();
-                break;
-            case FOLDDOWN:
-                foldArmsDown();
-                break;
-            case STOPINTAKE:
-                stopWheels();
-                break;
-            case STOPFOLD:
-                stopFolding();
-                break;
-            default:
-                case STOPALL:
-                stopWheels();
-                stopFolding();
-                break;
-        }
-    }
-
-    public void ejectCube(){
-        lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.EJECTING);
-        rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.EJECTING);
-    }
-
-    public void intakeCube(){
-        lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.INTAKING);
-        rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.INTAKING);
+    public void setIntakeSpeed(double speed){
+        armWheels.set(speed*Constants.kEjectCubeSpeedMod);
     }
 
     public void stopWheels(){
-        lManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.STOPPED);
-        rManipulatorArm.setCurrentState(EjectIntakeSpeedController.CurrentState.STOPPED);
-    }
-
-    public void foldArmsDown(){
-        armFlipperMotor.set(Constants.kFoldArmsDwn);
-    }
-
-    public void foldArmsUp(){
-        armFlipperMotor.set(Constants.kFoldArmsUp);
+        armWheels.set(0);
     }
 
     public void stopFolding(){
         armFlipperMotor.set(0);
+    }
+
+    public void stopAll(){
+        stopWheels();
+        stopFolding();
     }
 }

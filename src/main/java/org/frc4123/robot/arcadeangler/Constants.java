@@ -11,8 +11,7 @@ public class Constants {
     /**********TELEOP**********/
 
     //PowerCube Manipulator Constants
-    public static final float kEjectCubeSpeed = 1;
-    public static final float kIntakeCubeSpeed = -1;
+    public static final float kEjectCubeSpeedMod = 1;
     public static final float kFoldArmsUp = 1;
     public static final float kFoldArmsDwn = -1;
     public static final double kJoyNeutralZone = 0.5;
@@ -59,9 +58,8 @@ public class Constants {
 
     //TODO: Set these to reality once the electronics is laid out. Sparks?
     //PowerCube Manipulator Speed Controllers
-    public static final int id_grabber_wheel_left = 1;
-    public static final int id_grabber_wheel_right = 0;
-    public static final int id_grabber_flipper_upper = 2;
+    public static final int id_grabber_wheels = 1;
+    public static final int id_grabber_flipper_upper = 0;
     //PowerCube Grabber Limit Switch
     public static final int id_intake_limit = 1; //TODO: Find real input ID
 

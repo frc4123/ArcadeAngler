@@ -40,7 +40,8 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
 
         //PowerCube Manipulator Commands
-        mPWRCubeMan.setMode(mJoysticks.getCurrentGrabMode());
+        mPWRCubeMan.setIntakeSpeed(mJoysticks.getIntakeSpeed());
+        mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
 
     }
 
