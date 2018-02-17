@@ -44,9 +44,6 @@ public class Robot extends IterativeRobot {
         System.out.println("Robot.disabledInit");
     }
 
-
-    }
-
     @Override
     public void autonomousInit() { }
 
