@@ -52,22 +52,26 @@ public class Robot extends IterativeRobot {
     }
 
     @Override
-    public void autonomousInit() { }
+    public void autonomousInit() {
+    }
 
     @Override
-    public void teleopInit() { }
+    public void teleopInit() {
+    }
 
     @Override
-    public void testInit() { }
+    public void testInit() {
+    }
 
     @Override
     public void disabledPeriodic() {
         mElevator.stop();
         mJoysticks.disabledPeriodic();
     }
-    
+
     @Override
-    public void autonomousPeriodic() { }
+    public void autonomousPeriodic() {
+    }
 
     @Override
     public void teleopPeriodic() {
@@ -75,30 +79,35 @@ public class Robot extends IterativeRobot {
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
 
         //PowerCube Manipulator Commands
-        switch (mJoysticks.getGrabberStatus()){
-            case INTAKE:
-                mPCM.intakeCube();
-                break;
-            case EJECT:
-                mPCM.ejectCube();
-                break;
+        switch (mJoysticks.getFlipperUpperState()) {
+
             case UP:
-                mPCM.foldArmsUp();
+                mPWRCubeMan.foldArmsUp();
                 break;
             case DOWN:
-                mPCM.foldArmsDown();
+                mPWRCubeMan.foldArmsDown();
                 break;
-            case STOPPED:
-                default:
-                    mPCM.stopGrabbing();
-                    mPCM.stopFolding();
+            case NEUTRAL:
                 break;
+
+        }
+        switch (mJoysticks.getGrabberState()) {
+            case OPEN:
+                mPWRCubeMan.open();
+                break;
+            case CLOSE:
+
+                mPWRCubeMan.close();
+                break;
+            case NEUTRAL:
+                break;
+        }
 
         //Elevator
         mElevator.setMode(mJoysticks.getElevatorMode());
         mElevator.set(mJoysticks.getElevatorThrottle());
         System.out.println("mElevator.getDescendLimitSW() = " + mElevator.getDescendLimitSW());
-        if (mElevator.getDescendLimitSW()){
+        if (mElevator.getDescendLimitSW()) {
             mElevator.resetEncoder();
         }
 
