@@ -83,4 +83,5 @@ public class Constants {
     public static final int id_elevateSlave = 5;
 
 
+    public static double kAutoUpdateRate = 1.0 / 50.0;
 }

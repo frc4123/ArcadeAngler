@@ -1,0 +1,27 @@
+package org.frc4123.robot.arcadeangler.auto;
+
+import org.frc4123.robot.arcadeangler.auto.modes.AutoModeBase;
+
+public class AutoModeExecuter {
+    /**
+     * This class selects, runs, and stops (if necessary) a specified autonomous
+     * mode.
+     */
+    private AutoModeBase m_auto_mode;
+
+    public void setAutoMode(AutoModeBase new_auto_mode) {
+        m_auto_mode = new_auto_mode;
+    }
+
+    public void start() {
+        if (m_auto_mode != null) {
+            m_auto_mode.run();
+        }
+    }
+
+    public void stop() {
+        if (m_auto_mode != null) {
+            m_auto_mode.stop();
+        }
+    }
+}
