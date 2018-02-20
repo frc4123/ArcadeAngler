@@ -26,6 +26,7 @@ public class Constants {
     public static final double kElevateP = 0;
     public static final double kElevateI = 0;
     public static final double kElevateD = 0;
+    public static final int kPIDidx = 0;
 
     //Drive Chassis PID parameters
     //TODO Tune these

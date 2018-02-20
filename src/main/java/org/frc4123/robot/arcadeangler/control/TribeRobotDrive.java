@@ -15,8 +15,6 @@ public class TribeRobotDrive extends DifferentialDrive{
     private static WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.id_driveRightMaster);
     private static WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.id_driveRightSlave);
 
-    private final ADXRS450_Gyro mGyro;
-
     public enum AssistMode {NONE, HEADING, LINEAR}
     AssistMode mAssistMode = AssistMode.NONE;
     private PIDController headingPIDController;
@@ -47,7 +45,6 @@ public class TribeRobotDrive extends DifferentialDrive{
 
         setTalonControlMode(driveMode);
 
-        mGyro = new ADXRS450_Gyro();
 
         //Set up a PIDController for controlling robot's heading using mGyro as a feedback sensor
         headingPIDController = new PIDController(
@@ -100,8 +97,8 @@ public class TribeRobotDrive extends DifferentialDrive{
                 break;
 
             case ENCODER_POS:
-                rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Position, rightMaster.getActiveTrajectoryPosition());
-                leftMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Position, leftMaster.getActiveTrajectoryPosition());
+                rightMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Position, rightMaster.getSelectedSensorPosition(Constants.kPIDidx));
+                leftMaster.set(com.ctre.phoenix.motorcontrol.ControlMode.Position, rightMaster.getSelectedSensorPosition(Constants.kPIDidx));
 
                 //rightMaster.set(;
                 //leftMaster.set(leftMaster.getPosition());
@@ -276,30 +273,18 @@ public class TribeRobotDrive extends DifferentialDrive{
         SmartDashboard.putNumber("right_velocity", getRightVelocityInchesPerSecond());
         SmartDashboard.putNumber("left_error", leftMaster.getClosedLoopError(0));
         SmartDashboard.putNumber("right_error", rightMaster.getClosedLoopError(0));
-        SmartDashboard.putNumber("gyro_angle", mGyro.getAngle());
 
         SmartDashboard.putNumber("robotdrive_setpoint_error", getSetpointError());
     }
 
-    /**
-     * Grabs PID heading data from SmartDashboard. Used for debugging robot.
-     */
-    public void setPIDFromSmartDashboard(){
-        headingPIDController.setPID(
-                SmartDashboard.getNumber("headingPID_P", Constants.kHeadingClosedLoop_P),
-                SmartDashboard.getNumber("headingPID_I", Constants.kHeadingClosedLoop_I),
-                SmartDashboard.getNumber("headingPID_D", Constants.kHeadingClosedLoop_D));
-    }
 
     /**
      * Resets and zeros all sensors
      */
     public void resetSensors() {
         System.out.println("Resetting RobotDrive sensors");
-        leftMaster.setSelectedSensorPosition(leftMaster.);
+        leftMaster.setSelectedSensorPosition(0, Constants.kPIDidx, Constants.kTimeoutMs);
         rightMaster.setPosition(0);
-
-        mGyro.reset();
     }
 
 }
