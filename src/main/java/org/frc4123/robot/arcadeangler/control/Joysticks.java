@@ -2,6 +2,7 @@ package org.frc4123.robot.arcadeangler.control;
 
 import edu.wpi.first.wpilibj.Joystick;
 import org.frc4123.robot.arcadeangler.Constants;
+import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 
@@ -55,6 +56,8 @@ public class Joysticks {
         } else {
             return FlipperUpperState.NEUTRAL;
         }
+    public double getFlipperUpperSpeed(){
+        return -auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
     }
 
     public enum GrabberState {OPEN, CLOSE, NEUTRAL}
@@ -66,6 +69,8 @@ public class Joysticks {
         } else {
             return GrabberState.NEUTRAL;
         }
+    public double getIntakeSpeed(){
+        return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
     }
     
     //Elevator
