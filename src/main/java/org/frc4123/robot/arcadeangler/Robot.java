@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
     DifferentialDrive mDrive = new DifferentialDrive(left, right);
 
     //2018 Pneumatics Controller Test
-    Compressor squishyBoi = new Compressor(0);
+    //Compressor squishyBoi = new Compressor(0);
 
     @Override
     public void robotInit() {
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
         System.out.println("Robot.robotInit");
 
         //2018 Pneumatics Additions
-        squishyBoi.setClosedLoopControl(true);
+       // squishyBoi.setClosedLoopControl(true);
     }
 
     @Override
@@ -114,5 +114,25 @@ public class Robot extends IterativeRobot {
     }
 
     @Override
-    public void testPeriodic() { }
+    public void testPeriodic() {
+
+        System.out.println("Current LeftEncPos" + l_master.getSelectedSensorPosition(0));
+        System.out.println("Current RightEncPos" + r_master.getSelectedSensorPosition(0));
+        System.out.println("L ClosedLoopError = " + l_master.getClosedLoopError(0));
+        System.out.println("R ClosedLoopError = " + r_master.getClosedLoopError(0));
+//        l_slave.follow(l_master);
+//        r_slave.follow(r_master);
+        mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
+
+        while(mJoysticks.getAimAssit()){
+            l_master.set(ControlMode.Position, 18000);
+            r_master.set(ControlMode.Position, 18000);
+//			_talon_L_slave.follow(_talon_L_master);
+//			_talon_R_slave.follow(_talon_R_master);
+
+        }
+
+        l_master.setSelectedSensorPosition(0, 0, 10);
+        r_master.setSelectedSensorPosition(0, 0, 10);
+    }
 }
