@@ -2,11 +2,12 @@ package org.frc4123.robot.arcadeangler;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
-import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
+import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
@@ -15,7 +16,7 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
+    PneumaticGrabber mPWRCubeMan = new PneumaticGrabber();
     Elevator mElevator = new Elevator();
 
     //Drive
@@ -29,6 +30,9 @@ public class Robot extends IterativeRobot {
 
     DifferentialDrive mDrive = new DifferentialDrive(left, right);
 
+    //2018 Pneumatics Controller Test
+    Compressor squishyBoi = new Compressor(0);
+
     @Override
     public void robotInit() {
         l_master.set(ControlMode.PercentOutput, 0);
@@ -36,6 +40,9 @@ public class Robot extends IterativeRobot {
         r_master.set(ControlMode.PercentOutput, 0);
         r_slave.follow(r_master);
         System.out.println("Robot.robotInit");
+
+        //2018 Pneumatics Additions
+        squishyBoi.setClosedLoopControl(true);
     }
 
     @Override
@@ -72,8 +79,29 @@ public class Robot extends IterativeRobot {
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
 
         //PowerCube Manipulator Commands
-        mPWRCubeMan.setIntakeSpeed(mJoysticks.getIntakeSpeed());
-        mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
+        switch (mJoysticks.getFlipperUpperState()) {
+
+            case UP:
+                mPWRCubeMan.foldArmsUp();
+                break;
+            case DOWN:
+                mPWRCubeMan.foldArmsDown();
+                break;
+            case NEUTRAL:
+                break;
+
+        }
+        switch (mJoysticks.getGrabberState()) {
+            case OPEN:
+                mPWRCubeMan.open();
+                break;
+            case CLOSE:
+
+                mPWRCubeMan.close();
+                break;
+            case NEUTRAL:
+                break;
+        }
 
         //Elevator
         mElevator.setMode(mJoysticks.getElevatorMode());

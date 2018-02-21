@@ -2,7 +2,6 @@ package org.frc4123.robot.arcadeangler.control;
 
 import edu.wpi.first.wpilibj.Joystick;
 import org.frc4123.robot.arcadeangler.Constants;
-import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 
@@ -47,12 +46,26 @@ public class Joysticks {
     //Aux Joystick controls
 
     //Grabber
-    public double getFlipperUpperSpeed(){
-        return -auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
+    public enum FlipperUpperState {UP, DOWN, NEUTRAL}
+    public FlipperUpperState getFlipperUpperState(){
+        if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) <= -Constants.kJoyNeutralZone){
+            return FlipperUpperState.UP;
+        } else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) >= Constants.kJoyNeutralZone){
+            return FlipperUpperState.DOWN;
+        } else {
+            return FlipperUpperState.NEUTRAL;
+        }
     }
 
-    public double getIntakeSpeed(){
-        return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
+    public enum GrabberState {OPEN, CLOSE, NEUTRAL}
+    public GrabberState getGrabberState(){
+        if (auxStick.getRawButton(JoystickConstants.kF310_LBump)){
+            return GrabberState.OPEN;
+        } else if (auxStick.getRawButton(JoystickConstants.kF310_RBump)){
+            return GrabberState.CLOSE;
+        } else {
+            return GrabberState.NEUTRAL;
+        }
     }
     
     //Elevator
