@@ -45,22 +45,26 @@ public class Robot extends IterativeRobot {
     }
 
     @Override
-    public void autonomousInit() { }
+    public void autonomousInit() {
+    }
 
     @Override
-    public void teleopInit() { }
+    public void teleopInit() {
+    }
 
     @Override
-    public void testInit() { }
+    public void testInit() {
+    }
 
     @Override
     public void disabledPeriodic() {
         mElevator.stop();
         mJoysticks.disabledPeriodic();
     }
-    
+
     @Override
-    public void autonomousPeriodic() { }
+    public void autonomousPeriodic() {
+    }
 
     @Override
     public void teleopPeriodic() {
@@ -75,12 +79,13 @@ public class Robot extends IterativeRobot {
         mElevator.setMode(mJoysticks.getElevatorMode());
         mElevator.set(mJoysticks.getElevatorThrottle());
         System.out.println("mElevator.getDescendLimitSW() = " + mElevator.getDescendLimitSW());
-        if (mElevator.getDescendLimitSW()){
+        if (mElevator.getDescendLimitSW()) {
             mElevator.resetEncoder();
         }
 
     }
 
     @Override
-    public void testPeriodic() { }
+    public void testPeriodic() {
+    }
 }
