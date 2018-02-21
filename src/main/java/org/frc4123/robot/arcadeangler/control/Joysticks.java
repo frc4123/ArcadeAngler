@@ -47,43 +47,52 @@ public class Joysticks {
     //Aux Joystick controls
 
     //Grabber
-    public enum FlipperUpperState {UP, DOWN, NEUTRAL}
-    public FlipperUpperState getFlipperUpperState(){
-        if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) <= -Constants.kJoyNeutralZone){
+    public enum FlipperUpperState {
+        UP, DOWN, NEUTRAL
+    }
+
+    public FlipperUpperState getFlipperUpperState() {
+        if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) <= -Constants.kJoyNeutralZone) {
             return FlipperUpperState.UP;
-        } else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) >= Constants.kJoyNeutralZone){
+        } else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) >= Constants.kJoyNeutralZone) {
             return FlipperUpperState.DOWN;
         } else {
             return FlipperUpperState.NEUTRAL;
         }
-    public double getFlipperUpperSpeed(){
+    }
+
+    public double getFlipperUpperSpeed() {
         return -auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
     }
 
     public enum GrabberState {OPEN, CLOSE, NEUTRAL}
-    public GrabberState getGrabberState(){
-        if (auxStick.getRawButton(JoystickConstants.kF310_LBump)){
+
+    public GrabberState getGrabberState() {
+        if (auxStick.getRawButton(JoystickConstants.kF310_LBump)) {
             return GrabberState.OPEN;
-        } else if (auxStick.getRawButton(JoystickConstants.kF310_RBump)){
+        } else if (auxStick.getRawButton(JoystickConstants.kF310_RBump)) {
             return GrabberState.CLOSE;
         } else {
             return GrabberState.NEUTRAL;
         }
-    public double getIntakeSpeed(){
+    }
+
+    public double getIntakeSpeed() {
         return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
     }
-    
+
     //Elevator
     private Elevator.Mode currentMode = Elevator.Mode.MANUAL;
+
     public Elevator.Mode getElevatorMode() {
 
         if (auxStick.getPOV() != -1) {
             currentMode = Elevator.Mode.MANUAL;
-        }else if (auxStick.getRawButton(JoystickConstants.kF310_Y)) {
+        } else if (auxStick.getRawButton(JoystickConstants.kF310_Y)) {
             currentMode = Elevator.Mode.HIGH;
-        }else if (auxStick.getRawButton(JoystickConstants.kF310_B)) {
+        } else if (auxStick.getRawButton(JoystickConstants.kF310_B)) {
             currentMode = Elevator.Mode.MEDIUM;
-        }else if (auxStick.getRawButton(JoystickConstants.kF310_A)) {
+        } else if (auxStick.getRawButton(JoystickConstants.kF310_A)) {
             currentMode = Elevator.Mode.LOW;
         }
 
@@ -92,9 +101,10 @@ public class Joysticks {
 
     /**
      * A double to give elevator.set a speed in MANUAL mode
-     * @return  If POV "up" selected, return 1 * the position of the left Joystick Trigger
-     *          If POV "down" selected, return -1 * the position of the left Joystick Trigger
-     *          Default return is 0.
+     *
+     * @return If POV "up" selected, return 1 * the position of the left Joystick Trigger
+     * If POV "down" selected, return -1 * the position of the left Joystick Trigger
+     * Default return is 0.
      */
     public double getElevatorThrottle() {
         switch (auxStick.getPOV()) {

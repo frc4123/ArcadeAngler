@@ -17,8 +17,9 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    PneumaticGrabber mPWRCubeMan = new PneumaticGrabber();
-    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
+    PneumaticGrabber mGrabberTwo = new PneumaticGrabber();
+    Compressor squishyBoi = new Compressor(0);
+    PowerCubeManipulator mGrabberOne = new PowerCubeManipulator();
     Elevator mElevator = new Elevator();
 
     //Drive
@@ -31,9 +32,6 @@ public class Robot extends IterativeRobot {
     SpeedControllerGroup right = new SpeedControllerGroup(r_master, r_slave);
 
     DifferentialDrive mDrive = new DifferentialDrive(left, right);
-
-    //2018 Pneumatics Controller Test
-    Compressor squishyBoi = new Compressor(0);
 
     @Override
     public void robotInit() {
@@ -84,10 +82,10 @@ public class Robot extends IterativeRobot {
         switch (mJoysticks.getFlipperUpperState()) {
 
             case UP:
-                mPWRCubeMan.foldArmsUp();
+                mGrabberTwo.foldArmsUp();
                 break;
             case DOWN:
-                mPWRCubeMan.foldArmsDown();
+                mGrabberTwo.foldArmsDown();
                 break;
             case NEUTRAL:
                 break;
@@ -95,17 +93,17 @@ public class Robot extends IterativeRobot {
         }
         switch (mJoysticks.getGrabberState()) {
             case OPEN:
-                mPWRCubeMan.open();
+                mGrabberTwo.open();
                 break;
             case CLOSE:
 
-                mPWRCubeMan.close();
+                mGrabberTwo.close();
                 break;
             case NEUTRAL:
                 break;
         }
-        mPWRCubeMan.setIntakeSpeed(mJoysticks.getIntakeSpeed());
-        mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
+        mGrabberOne.setIntakeSpeed(mJoysticks.getIntakeSpeed());
+        mGrabberOne.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
 
         //Elevator
         mElevator.setMode(mJoysticks.getElevatorMode());
