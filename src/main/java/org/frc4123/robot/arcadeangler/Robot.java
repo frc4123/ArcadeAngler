@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
+import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
@@ -17,6 +18,7 @@ public class Robot extends IterativeRobot {
 
     //Subsystems
     PneumaticGrabber mPWRCubeMan = new PneumaticGrabber();
+    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
     Elevator mElevator = new Elevator();
 
     //Drive
@@ -102,6 +104,8 @@ public class Robot extends IterativeRobot {
             case NEUTRAL:
                 break;
         }
+        mPWRCubeMan.setIntakeSpeed(mJoysticks.getIntakeSpeed());
+        mPWRCubeMan.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
 
         //Elevator
         mElevator.setMode(mJoysticks.getElevatorMode());
