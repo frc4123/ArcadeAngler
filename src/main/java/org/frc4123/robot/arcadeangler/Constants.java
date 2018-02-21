@@ -26,7 +26,9 @@ public class Constants {
     public static final double kElevateP = 0;
     public static final double kElevateI = 0;
     public static final double kElevateD = 0;
-    public static final int kPIDidx = 0;
+
+    public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 10;
 
     //Drive Chassis PID parameters
     //TODO Tune these
@@ -66,5 +68,8 @@ public class Constants {
     public static final int id_elevate_talon_right = 4;
     public static final int id_eleavte_talon_left = 5;
 
+    // auto stuff to be sorted
+    public static final double kTicksPerFoot = 2607.5945876176131812373915790953; //* 2) / 7; Kinda works for turning = 3650;
+    public static final double kSensorUnitsPerRot = 4096; //* 2) / 7;
 
 }

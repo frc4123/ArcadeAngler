@@ -2,11 +2,11 @@ plugins {
     id "java"
     id "eclipse"
     id "idea"
-    id "jaci.openrio.gradle.GradleRIO" version "2018.01.07"
+    id "jaci.openrio.gradle.GradleRIO" version "2018.01.22"
 }
 
 def TEAM = 4123
-def ROBOT_CLASS = "org.frc4123.robot.arcadeangler"
+def ROBOT_CLASS = "org.frc4123.robot.arcadeangler.Robot"
 
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project EmbeddedTools.
@@ -23,13 +23,14 @@ deploy {
     }
 }
 
-// Defining my dependencies. In this case, WPILib (+ friends), CTRE Toolsuite (Talon SRX)
+// Defining my dependencies. In this case, WPILib (+ friends), CTRE Phoenix (Talon SRX)
 // and NavX.
 dependencies {
     compile wpilib()
     compile ctre()
     compile navx()
     compile openrio.powerup.matchData()
+    compile pathfinder()
 }
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
