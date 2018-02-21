@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.Constants;
 
-public class PowerCubeManipulator {
+public class PneumaticGrabber {
 
     DoubleSolenoid armOpener = new DoubleSolenoid(2, 3);
     DoubleSolenoid grabFlipper = new DoubleSolenoid(0, 1);

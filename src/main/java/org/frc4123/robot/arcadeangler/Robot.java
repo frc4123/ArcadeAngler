@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
-import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
+import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
@@ -16,7 +16,7 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
+    PneumaticGrabber mPWRCubeMan = new PneumaticGrabber();
     Elevator mElevator = new Elevator();
 
     //Drive
