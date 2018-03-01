@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
@@ -21,6 +22,7 @@ public class Robot extends IterativeRobot {
     Compressor squishyBoi = new Compressor(0);
     PowerCubeManipulator mGrabberOne = new PowerCubeManipulator();
     Elevator mElevator = new Elevator();
+    Boolean isGrabberTwoSelected = true;
 
     //Drive
     WPI_TalonSRX l_master = new WPI_TalonSRX(Constants.id_driveLeftMaster);
@@ -76,34 +78,40 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
+        SmartDashboard.getBoolean("Is Pneumatic Grabber Used?", isGrabberTwoSelected)
+
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
+        
+        //GrabberTwo Commands
+        if (isGrabberTwoSelected) {
+            switch (mJoysticks.getFlipperUpperState()) {
 
-        //PowerCube Manipulator Commands
-        switch (mJoysticks.getFlipperUpperState()) {
+                case UP:
+                    mGrabberTwo.foldArmsUp();
+                    break;
+                case DOWN:
+                    mGrabberTwo.foldArmsDown();
+                    break;
+                case NEUTRAL:
+                    break;
 
-            case UP:
-                mGrabberTwo.foldArmsUp();
-                break;
-            case DOWN:
-                mGrabberTwo.foldArmsDown();
-                break;
-            case NEUTRAL:
-                break;
+            }
+            switch (mJoysticks.getGrabberState()) {
+                case OPEN:
+                    mGrabberTwo.open();
+                    break;
+                case CLOSE:
 
+                    mGrabberTwo.close();
+                    break;
+                case NEUTRAL:
+                    break;
+            }
+        } else {
+            //GrabberOne Control
+            mGrabberOne.setIntakeSpeed(mJoysticks.getIntakeSpeed());
+            mGrabberOne.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
         }
-        switch (mJoysticks.getGrabberState()) {
-            case OPEN:
-                mGrabberTwo.open();
-                break;
-            case CLOSE:
-
-                mGrabberTwo.close();
-                break;
-            case NEUTRAL:
-                break;
-        }
-        mGrabberOne.setIntakeSpeed(mJoysticks.getIntakeSpeed());
-        mGrabberOne.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
 
         //Elevator
         mElevator.setMode(mJoysticks.getElevatorMode());

@@ -6,9 +6,6 @@ import org.frc4123.robot.arcadeangler.Constants;
 
 public class PowerCubeManipulator {
 
-//    EjectIntakeSpeedController lManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_left, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeedMod, Constants.kTimeCubeEject);
-//    EjectIntakeSpeedController rManipulatorArm = new EjectIntakeSpeedController(Constants.id_grabber_wheel_right, Constants.kIntakeCubeSpeed, Constants.id_intake_limit, Constants.kEjectCubeSpeedMod, Constants.kTimeCubeEject);
-
     Spark armFlipperMotor = new Spark(Constants.id_grabber_flipper_upper);
     Spark armWheels = new Spark(Constants.id_grabber_wheels);
 

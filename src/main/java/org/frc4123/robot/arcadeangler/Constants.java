@@ -12,7 +12,7 @@ public class Constants {
     /**********TELEOP**********/
 
     //PowerCube Manipulator Constants
-    public static final float kIntakeEjectCubeSpeedMod = 1;
+    public static final float kEjectCubeSpeedMod = 1;
     public static final float kFoldArmsUp = 1;
     public static final float kFoldArmsDwn = -1;
     public static final double kJoyNeutralZone = 0.5;

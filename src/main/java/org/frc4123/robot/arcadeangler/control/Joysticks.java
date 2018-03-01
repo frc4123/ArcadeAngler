@@ -46,7 +46,16 @@ public class Joysticks {
 
     //Aux Joystick controls
 
-    //Grabber
+    //GrabberOne
+    public double getFlipperUpperSpeed() {
+        return -auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
+    }
+
+    public double getIntakeSpeed() {
+        return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
+    }
+
+    //GrabberTwo
     public enum FlipperUpperState {
         UP, DOWN, NEUTRAL
     }
@@ -61,10 +70,6 @@ public class Joysticks {
         }
     }
 
-    public double getFlipperUpperSpeed() {
-        return -auxStick.getRawAxis(JoystickConstants.kF310_RJoyY);
-    }
-
     public enum GrabberState {OPEN, CLOSE, NEUTRAL}
 
     public GrabberState getGrabberState() {
@@ -75,10 +80,6 @@ public class Joysticks {
         } else {
             return GrabberState.NEUTRAL;
         }
-    }
-
-    public double getIntakeSpeed() {
-        return -(auxStick.getRawButton(JoystickConstants.kF310_LBump) ? 1 : 0) + (auxStick.getRawButton(JoystickConstants.kF310_RBump) ? 1 : 0);
     }
 
     //Elevator
