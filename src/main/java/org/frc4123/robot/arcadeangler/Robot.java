@@ -43,6 +43,7 @@ public class Robot extends IterativeRobot {
         r_slave.follow(r_master);
         System.out.println("Robot.robotInit");
 
+        //TODO: Test what happens when you have this enabled but there's no pneumatics commands
         //2018 Pneumatics Additions
         squishyBoi.setClosedLoopControl(true);
     }
@@ -78,14 +79,13 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
-        SmartDashboard.getBoolean("Is Pneumatic Grabber Used?", isGrabberTwoSelected)
+        SmartDashboard.getBoolean("Is Pneumatic Grabber Used?", isGrabberTwoSelected);
 
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
-        
+
         //GrabberTwo Commands
         if (isGrabberTwoSelected) {
             switch (mJoysticks.getFlipperUpperState()) {
-
                 case UP:
                     mGrabberTwo.foldArmsUp();
                     break;
@@ -101,7 +101,6 @@ public class Robot extends IterativeRobot {
                     mGrabberTwo.open();
                     break;
                 case CLOSE:
-
                     mGrabberTwo.close();
                     break;
                 case NEUTRAL:
