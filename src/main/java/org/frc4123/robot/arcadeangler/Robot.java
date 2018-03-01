@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
+import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
@@ -16,8 +18,11 @@ public class Robot extends IterativeRobot {
     Joysticks mJoysticks = new Joysticks();
 
     //Subsystems
-    PowerCubeManipulator mPWRCubeMan = new PowerCubeManipulator();
+    PneumaticGrabber mGrabberTwo = new PneumaticGrabber();
+    Compressor squishyBoi = new Compressor(0);
+    PowerCubeManipulator mGrabberOne = new PowerCubeManipulator();
     Elevator mElevator = new Elevator();
+    Boolean isGrabberTwoSelected = true;
 
     //Drive
     WPI_TalonSRX l_master = new WPI_TalonSRX(Constants.id_driveLeftMaster);
@@ -30,9 +35,6 @@ public class Robot extends IterativeRobot {
 
     DifferentialDrive mDrive = new DifferentialDrive(left, right);
 
-    //2018 Pneumatics Controller Test
-    Compressor squishyBoi = new Compressor(0);
-
     @Override
     public void robotInit() {
         l_master.set(ControlMode.PercentOutput, 0);
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
         r_slave.follow(r_master);
         System.out.println("Robot.robotInit");
 
+        //TODO: Test what happens when you have this enabled but there's no pneumatics commands
         //2018 Pneumatics Additions
         squishyBoi.setClosedLoopControl(true);
     }
@@ -76,31 +79,37 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
+        SmartDashboard.getBoolean("Is Pneumatic Grabber Used?", isGrabberTwoSelected);
+
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
 
-        //PowerCube Manipulator Commands
-        switch (mJoysticks.getFlipperUpperState()) {
+        //GrabberTwo Commands
+        if (isGrabberTwoSelected) {
+            switch (mJoysticks.getFlipperUpperState()) {
+                case UP:
+                    mGrabberTwo.foldArmsUp();
+                    break;
+                case DOWN:
+                    mGrabberTwo.foldArmsDown();
+                    break;
+                case NEUTRAL:
+                    break;
 
-            case UP:
-                mPWRCubeMan.foldArmsUp();
-                break;
-            case DOWN:
-                mPWRCubeMan.foldArmsDown();
-                break;
-            case NEUTRAL:
-                break;
-
-        }
-        switch (mJoysticks.getGrabberState()) {
-            case OPEN:
-                mPWRCubeMan.open();
-                break;
-            case CLOSE:
-
-                mPWRCubeMan.close();
-                break;
-            case NEUTRAL:
-                break;
+            }
+            switch (mJoysticks.getGrabberState()) {
+                case OPEN:
+                    mGrabberTwo.open();
+                    break;
+                case CLOSE:
+                    mGrabberTwo.close();
+                    break;
+                case NEUTRAL:
+                    break;
+            }
+        } else {
+            //GrabberOne Control
+            mGrabberOne.setIntakeSpeed(mJoysticks.getIntakeSpeed());
+            mGrabberOne.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
         }
 
         //Elevator
@@ -114,5 +123,6 @@ public class Robot extends IterativeRobot {
     }
 
     @Override
-    public void testPeriodic() { }
+    public void testPeriodic() {
+    }
 }

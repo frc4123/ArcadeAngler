@@ -1,35 +1,33 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.Spark;
 import org.frc4123.robot.arcadeangler.Constants;
 
 public class PowerCubeManipulator {
 
-    DoubleSolenoid armOpener = new DoubleSolenoid(2, 3);
-    DoubleSolenoid grabFlipper = new DoubleSolenoid(0, 1);
+    Spark armFlipperMotor = new Spark(Constants.id_grabber_flipper_upper);
+    Spark armWheels = new Spark(Constants.id_grabber_wheels);
 
-    public void foldArmsDown(){
-        grabFlipper.set(DoubleSolenoid.Value.kReverse);
+    public void setFlipperUpperSpeed(double speed) {
+        armFlipperMotor.set(speed);
     }
 
-    public void foldArmsUp(){
-        grabFlipper.set(DoubleSolenoid.Value.kForward);
+    public void setIntakeSpeed(double speed){
+        armWheels.set(speed*Constants.kEjectCubeSpeedMod);
     }
 
-    public void open(){
-        armOpener.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void close(){
-        armOpener.set(DoubleSolenoid.Value.kReverse);
+    public void stopWheels(){
+        armWheels.set(0);
     }
 
     public void stopFolding(){
-        grabFlipper.set(DoubleSolenoid.Value.kOff);
+        armFlipperMotor.set(0);
     }
 
-    public void stopGrabbingCube(){
-        armOpener.set(DoubleSolenoid.Value.kOff);
+    public void stopAll(){
+        stopWheels();
+        stopFolding();
+
     }
 }
