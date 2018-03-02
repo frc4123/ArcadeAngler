@@ -2,7 +2,6 @@ package org.frc4123.robot.arcadeangler.control;
 
 import edu.wpi.first.wpilibj.Joystick;
 import org.frc4123.robot.arcadeangler.Constants;
-import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 

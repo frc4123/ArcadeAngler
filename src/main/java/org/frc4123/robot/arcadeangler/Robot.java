@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
-import org.frc4123.robot.arcadeangler.subsystems.PowerCubeManipulator;
+import org.frc4123.robot.arcadeangler.subsystems.WheelsGrabber;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class Robot extends IterativeRobot {
@@ -20,7 +20,7 @@ public class Robot extends IterativeRobot {
     //Subsystems
     PneumaticGrabber mGrabberTwo = new PneumaticGrabber();
     Compressor squishyBoi = new Compressor(0);
-    PowerCubeManipulator mGrabberOne = new PowerCubeManipulator();
+    WheelsGrabber mGrabberOne = new WheelsGrabber();
     Elevator mElevator = new Elevator();
     Boolean isGrabberTwoSelected = true;
 
