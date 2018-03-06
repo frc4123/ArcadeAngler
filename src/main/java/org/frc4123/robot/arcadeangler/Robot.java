@@ -83,28 +83,11 @@ public class Robot extends IterativeRobot {
 
         mDrive.arcadeDrive(mJoysticks.getThrottle(), mJoysticks.getTurn());
 
-        //GrabberTwo Commands
+        //Grabbers - Switch between from SmartDashboard, GrabberTwo is default
         if (isGrabberTwoSelected) {
-            switch (mJoysticks.getFlipperUpperState()) {
-                case UP:
-                    mGrabberTwo.foldArmsUp();
-                    break;
-                case DOWN:
-                    mGrabberTwo.foldArmsDown();
-                    break;
-                case NEUTRAL:
-                    break;
-
-            }
-            switch (mJoysticks.getGrabberState()) {
-                case OPEN:
-                    mGrabberTwo.open();
-                    break;
-                case CLOSE:
-                    mGrabberTwo.close();
-                    break;
-                case NEUTRAL:
-                    break;
+            //GrabberTwo Commands
+            mGrabberTwo.setGrabberState(mJoysticks.getGrabberState());
+            mGrabberTwo.setFlipperUpperState(mJoysticks.getFlipperUpperState());
             }
         } else {
             //GrabberOne Control

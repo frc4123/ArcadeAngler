@@ -1,13 +1,53 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Spark;
-import org.frc4123.robot.arcadeangler.Constants;
 
 public class PneumaticGrabber {
 
     DoubleSolenoid armOpener = new DoubleSolenoid(2, 3);
     DoubleSolenoid grabFlipper = new DoubleSolenoid(0, 1);
+
+    public enum GrabberState {OPEN, CLOSE, NEUTRAL;}
+
+    private GrabberState grabState = GrabberState.NEUTRAL;
+
+    public enum FlipperUpperState {UP, DOWN, NEUTRAL}
+
+    private FlipperUpperState flipState = FlipperUpperState.NEUTRAL;
+
+    public void setGrabberState(GrabberState grabState) {
+        this.grabState = grabState;
+
+        switch (grabState) {
+            case OPEN:
+                open();
+                break;
+            case CLOSE:
+                close();
+                break;
+            case NEUTRAL:
+            default:
+                stopGrabbingCube();
+                break;
+        }
+    }
+
+    public void setFlipperUpperState(FlipperUpperState flipState) {
+        this.flipState = flipState;
+
+        switch (flipState) {
+            case UP:
+                foldArmsUp();
+                break;
+            case DOWN:
+                foldArmsDown();
+                break;
+            case NEUTRAL:
+            default:
+                stopFolding();
+                break;
+        }
+    }
 
     public void foldArmsDown() {
         grabFlipper.set(DoubleSolenoid.Value.kReverse);

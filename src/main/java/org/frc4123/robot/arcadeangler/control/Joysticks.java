@@ -3,6 +3,7 @@ package org.frc4123.robot.arcadeangler.control;
 import edu.wpi.first.wpilibj.Joystick;
 import org.frc4123.robot.arcadeangler.Constants;
 import org.frc4123.robot.arcadeangler.subsystems.Elevator;
+import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 
 
 public class Joysticks {
@@ -55,30 +56,32 @@ public class Joysticks {
     }
 
     //GrabberTwo
-    public enum FlipperUpperState {
-        UP, DOWN, NEUTRAL
-    }
+    private PneumaticGrabber.GrabberState currentGrabState = PneumaticGrabber.GrabberState.NEUTRAL;
+    private PneumaticGrabber.FlipperUpperState currentFlipState = PneumaticGrabber.FlipperUpperState.NEUTRAL;
 
-    public FlipperUpperState getFlipperUpperState() {
+    public PneumaticGrabber.FlipperUpperState getFlipperUpperState() {
         if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) <= -Constants.kJoyNeutralZone) {
-            return FlipperUpperState.UP;
+            currentFlipState = PneumaticGrabber.FlipperUpperState.UP;
         } else if (auxStick.getRawAxis(JoystickConstants.kF310_RJoyY) >= Constants.kJoyNeutralZone) {
-            return FlipperUpperState.DOWN;
+            currentFlipState = PneumaticGrabber.FlipperUpperState.DOWN;
         } else {
-            return FlipperUpperState.NEUTRAL;
+            currentFlipState = PneumaticGrabber.FlipperUpperState.NEUTRAL;
         }
+
+        return currentFlipState;
     }
 
-    public enum GrabberState {OPEN, CLOSE, NEUTRAL}
 
-    public GrabberState getGrabberState() {
+    public PneumaticGrabber.GrabberState getGrabberState() {
         if (auxStick.getRawButton(JoystickConstants.kF310_LBump)) {
-            return GrabberState.OPEN;
+            currentGrabState = PneumaticGrabber.GrabberState.OPEN;
         } else if (auxStick.getRawButton(JoystickConstants.kF310_RBump)) {
-            return GrabberState.CLOSE;
+            currentGrabState = PneumaticGrabber.GrabberState.CLOSE;
         } else {
-            return GrabberState.NEUTRAL;
+            currentGrabState = PneumaticGrabber.GrabberState.NEUTRAL;
         }
+
+        return currentGrabState;
     }
 
     //Elevator
