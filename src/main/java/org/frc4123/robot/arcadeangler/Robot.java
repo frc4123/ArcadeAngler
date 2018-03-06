@@ -88,8 +88,7 @@ public class Robot extends IterativeRobot {
             //GrabberTwo Commands
             mGrabberTwo.setGrabberState(mJoysticks.getGrabberState());
             mGrabberTwo.setFlipperUpperState(mJoysticks.getFlipperUpperState());
-            }
-        } else {
+            } else {
             //GrabberOne Control
             mGrabberOne.setIntakeSpeed(mJoysticks.getIntakeSpeed());
             mGrabberOne.setFlipperUpperSpeed(mJoysticks.getFlipperUpperSpeed());
