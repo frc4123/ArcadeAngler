@@ -29,7 +29,7 @@ public class ArmsPneumaticAction implements Action {
 
     @Override
     public boolean isFinished() {
-        if (mGrabber2.isArmsDown() && mGrabber2.isArmsClosed()) {
+        if (mGrabber2.isArmsClosed()) {
             isCubeGrabbed = true;
             return isCubeGrabbed;
         } else {
