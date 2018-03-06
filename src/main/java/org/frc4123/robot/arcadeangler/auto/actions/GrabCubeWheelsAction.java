@@ -1,17 +1,17 @@
 package org.frc4123.robot.arcadeangler.auto.actions;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
+import org.frc4123.robot.arcadeangler.subsystems.WheelsGrabber;
 
-public class GrabCubePneumaticAction implements Action {
+public class GrabCubeWheelsAction implements Action {
 
-    private final PneumaticGrabber mGrabber2 = new PneumaticGrabber();
+    private final WheelsGrabber mGrabber2 = new WheelsGrabber();
 
     private boolean isCubeGrabbed = false;
 
     @Override
     public boolean isFinished() {
-        if (mGrabber2.isArmsDown() && mGrabber2.isArmsClosed()){
+        if (mGrabber2.isArmsDown() && mGrabber2.isCubeGrabbed()){
             isCubeGrabbed = true;
             return isCubeGrabbed;
         } else {
@@ -27,7 +27,7 @@ public class GrabCubePneumaticAction implements Action {
 
     @Override
     public void done() {
-        SmartDashboard.putBoolean("isGrabCubePneumAction Complete?", isCubeGrabbed);
+        SmartDashboard.putBoolean("isGrabCubeWheelsAction Complete?", isCubeGrabbed);
     }
 
     @Override

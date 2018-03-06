@@ -40,6 +40,7 @@ public class WheelsGrabber {
     }
 
     public boolean isArmsDown() {
+        //TODO: Find a better way to get this
         if (armFlipper.get() == 0) {
             return true;
         } else {
