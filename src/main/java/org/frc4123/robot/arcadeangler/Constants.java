@@ -9,6 +9,11 @@ public class Constants {
 
     /***********AUTO***********/
 
+    //Grabber2
+    public static final double kIntakeCubeSpeed = -1;
+    public static final double kEjectCubeSpeed = 1;
+    public static final double kStopCubeSpeed = 0;
+
     /**********TELEOP**********/
 
     //PowerCube Manipulator Constants
