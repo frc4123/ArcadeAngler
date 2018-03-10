@@ -89,4 +89,12 @@ public class Constants {
 
 
     public static double kAutoUpdateRate = 1.0 / 50.0;
+
+
+    // Motion Profile Params
+    public static final double kTicksPerMeter = 2607.5945876176131812373915790953 * 1/0.3048; //* 2) / 7; Kinda works for turning = 3650;
+    public static double kMetersPerFoot = 0.3048;
+    public static final double kTicksPerFoot = 2607.5945876176131812373915790953; //* 2) / 7; Kinda works for turning = 3650;
+    public static final double kSensorUnitsPerRot = 4096; //* 2) / 7;
+    public static int kBaseTrajPeriodMs = 50;
 }

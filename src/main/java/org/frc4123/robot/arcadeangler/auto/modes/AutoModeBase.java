@@ -16,11 +16,14 @@ public abstract class AutoModeBase {
     public void run() {
         m_active = true;
 
-        //TODO Determine if necessary / how will be executed
-        routine();
+        // Run auto mode routine in a new thread
+        new Thread(() -> {
+            routine();
+            System.out.println("Auto mode done");
 //	            System.out.println("Auto mode done, ended early");
-        //done();
-        System.out.println("Auto mode done");
+            //done();
+        }).start();
+
     }
 
     public void done() {
