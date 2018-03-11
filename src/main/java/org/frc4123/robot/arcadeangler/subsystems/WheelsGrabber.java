@@ -7,6 +7,14 @@ import org.frc4123.robot.arcadeangler.Constants;
 
 public class WheelsGrabber {
 
+    private static WheelsGrabber mInstance = null;
+    public static WheelsGrabber getInstance() {
+        if (mInstance == null) {
+            mInstance = new WheelsGrabber();
+        }
+        return mInstance;
+    }
+
     Spark armFlipper = new Spark(Constants.id_grabber_flipper_upper);
     Spark armWheels = new Spark(Constants.id_grabber_wheels);
 

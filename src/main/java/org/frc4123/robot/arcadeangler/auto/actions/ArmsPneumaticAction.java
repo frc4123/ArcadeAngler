@@ -5,7 +5,7 @@ import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 
 public class ArmsPneumaticAction implements Action {
 
-    private final PneumaticGrabber mGrabber2 = new PneumaticGrabber();
+    private PneumaticGrabber mGrabber2 = PneumaticGrabber.getInstance();
 
     private enum State {OPEN, CLOSE}
 
@@ -29,7 +29,7 @@ public class ArmsPneumaticAction implements Action {
 
     @Override
     public boolean isFinished() {
-        if (mGrabber2.isArmsClosed()) {
+        if (mGrabber2.isArmsDown() && mGrabber2.isArmsClosed()) {
             isCubeGrabbed = true;
             return isCubeGrabbed;
         } else {

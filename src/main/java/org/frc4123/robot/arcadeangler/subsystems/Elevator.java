@@ -9,6 +9,14 @@ import org.frc4123.robot.arcadeangler.Constants;
 
 public class Elevator {
 
+    private static Elevator mInstance = null;
+    public static Elevator getInstance() {
+        if (mInstance == null) {
+            mInstance = new Elevator();
+        }
+        return mInstance;
+    }
+
     WPI_TalonSRX master = new WPI_TalonSRX(Constants.id_elevateMaster);
     WPI_TalonSRX slave = new WPI_TalonSRX(Constants.id_elevateSlave);
 

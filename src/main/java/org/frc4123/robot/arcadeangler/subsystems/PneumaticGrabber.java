@@ -1,11 +1,21 @@
 package org.frc4123.robot.arcadeangler.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class PneumaticGrabber {
 
+    private static PneumaticGrabber mInstance = null;
+    public static PneumaticGrabber getInstance() {
+        if (mInstance == null) {
+            mInstance = new PneumaticGrabber();
+        }
+        return mInstance;
+    }
+
     DoubleSolenoid armOpener = new DoubleSolenoid(2, 3);
     DoubleSolenoid grabFlipper = new DoubleSolenoid(0, 1);
+    public Compressor squishyBoi = new Compressor(0);
 
     public enum GrabberState {OPEN, CLOSE, NEUTRAL;}
 

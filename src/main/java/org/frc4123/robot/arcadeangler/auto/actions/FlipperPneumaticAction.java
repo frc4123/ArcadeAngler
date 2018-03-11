@@ -5,7 +5,7 @@ import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 
 public class FlipperPneumaticAction implements Action {
 
-    private final PneumaticGrabber mGrabber2 = new PneumaticGrabber();
+    private PneumaticGrabber mGrabber2 = PneumaticGrabber.getInstance();
 
     private enum State {DOWN, UP}
 

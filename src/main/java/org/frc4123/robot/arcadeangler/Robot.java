@@ -26,10 +26,9 @@ public class Robot extends IterativeRobot {
 
     //Subsystems
     DriveBase mDriveBase = DriveBase.getInstance();
-    PneumaticGrabber mGrabberTwo = new PneumaticGrabber();
-    Compressor squishyBoi = new Compressor(0);
-    WheelsGrabber mGrabberOne = new WheelsGrabber();
-    Elevator mElevator = new Elevator();
+    PneumaticGrabber mGrabberTwo = PneumaticGrabber.getInstance();
+    WheelsGrabber mGrabberOne = WheelsGrabber.getInstance();
+    Elevator mElevator = Elevator.getInstance();
     Boolean isGrabberTwoSelected = true;
 
 
@@ -38,8 +37,8 @@ public class Robot extends IterativeRobot {
         System.out.println("Robot.robotInit");
 
         //TODO: Test what happens when you have this enabled but there's no pneumatics commands
-        //2018 Pneumatics Additions
-        squishyBoi.setClosedLoopControl(true);
+        //Compressor Enable Closed Loop Control (PCM does all the work)
+        mGrabberTwo.squishyBoi.setClosedLoopControl(true);
     }
 
     @Override

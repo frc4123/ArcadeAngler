@@ -5,7 +5,7 @@ import org.frc4123.robot.arcadeangler.subsystems.Elevator;
 
 public class ElevateAction implements Action {
 
-    private final Elevator mElevator = new Elevator();
+    private Elevator mElevator = Elevator.getInstance();
 
     private enum Position {SWITCH, SCALE, DOWN};
     private Elevator.Mode elevateMode;
