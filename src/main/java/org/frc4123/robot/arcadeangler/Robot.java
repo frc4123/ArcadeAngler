@@ -12,6 +12,7 @@ import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.Waypoint;
 import org.frc4123.robot.arcadeangler.auto.AutoModeExecuter;
+import org.frc4123.robot.arcadeangler.auto.modes.CrossBaselineMode;
 import org.frc4123.robot.arcadeangler.auto.modes.TestAutoMode;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.subsystems.DriveBase;

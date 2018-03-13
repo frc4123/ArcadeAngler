@@ -8,13 +8,16 @@ import org.frc4123.robot.arcadeangler.auto.actions.DriveMPAction;
 import java.io.File;
 
 public class SwitchCubeDeposit extends AutoModeBase {
-    @Override
+    //@Override
+
+    Trajectory left;
+    Trajectory right;
+
     protected void routine() {
         String gameData;
         gameData = DriverStation.getInstance().getGameSpecificMessage();
 
-        Trajectory left;
-        Trajectory right;
+
         
         if(gameData.length() > 0)
         {
