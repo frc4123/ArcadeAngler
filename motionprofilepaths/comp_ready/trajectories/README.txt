@@ -1,0 +1,3 @@
+Naming Conventions:
+robotposition_itemposition_left_detailed.csv
+robotposition_itemposition_right_detailed.csv
