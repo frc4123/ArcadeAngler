@@ -9,6 +9,9 @@ public class Constants {
 
     /***********AUTO***********/
 
+    //Motion Profile
+    public static final double kWheelBaseWidth = 1.0; //Measured in feet
+
     //Grabber2
     public static final double kIntakeCubeSpeed = -1;
     public static final double kEjectCubeSpeed = 1;
@@ -27,7 +30,7 @@ public class Constants {
 
     //Drive Chassis and wheel and motor constants
     public static final double kChassisWheelDiameterInch = 6;
-    public static final double kChassisWheelCircumferenceInch = kChassisWheelDiameterInch*Math.PI;
+    public static final double kChassisWheelCircumferenceInch = kChassisWheelDiameterInch * Math.PI;
 
     //TalonSRX's now have multiple PID Loops so we want to select the first one
     public static final int kPIDLoopIdx = 0;
@@ -63,10 +66,8 @@ public class Constants {
     public static final int kElevatorLow = 3;
     public static final int kIntegralZone = 700;
     public static final int id_descend_limit = 2; //TODO: Find real input number
-    public static final int kElevateMaxPos = 30000;
-    public static final int kDescendMaxPos = 30000;
     public static final int kElevateAllowableError = 10;
-  
+
 
     //Robot Ports - These should match up to TODO: create Google doc to outline motor controller ports
 
@@ -92,7 +93,7 @@ public class Constants {
 
 
     // Motion Profile Params
-    public static final double kTicksPerMeter = 2607.5945876176131812373915790953 * 1/0.3048; //* 2) / 7; Kinda works for turning = 3650;
+    public static final double kTicksPerMeter = 2607.5945876176131812373915790953 * 1 / 0.3048; //* 2) / 7; Kinda works for turning = 3650;
     public static double kMetersPerFoot = 0.3048;
     public static final double kTicksPerFoot = 2607.5945876176131812373915790953; //* 2) / 7; Kinda works for turning = 3650;
     public static final double kSensorUnitsPerRot = 4096; //* 2) / 7;

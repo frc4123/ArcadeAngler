@@ -14,5 +14,6 @@ public class CrossBaselineMode extends AutoModeBase {
         Trajectory right = Pathfinder.readFromCSV(new File("/home/lvuser/trajectories/crossbaseline_right_detailed.csv"));
 
         runAction(new DriveMPAction(left, right));
+        System.out.println("Drove to Baseline.");
     }
 }

@@ -318,7 +318,7 @@ public class MotionProfile {
         if (_l_trajectory == null || _r_trajectory == null) {
             TankModifier modifier = new TankModifier(_trajectory);
 //        modifier.modify(0.6096);
-            modifier.modify(1.0); // TODO kWheelbaseWidth
+            modifier.modify(Constants.kWheelBaseWidth);
 
             _l_trajectory = modifier.getLeftTrajectory();
             _r_trajectory = modifier.getRightTrajectory();
