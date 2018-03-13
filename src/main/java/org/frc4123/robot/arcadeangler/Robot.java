@@ -32,6 +32,8 @@ public class Robot extends IterativeRobot {
     Elevator mElevator = Elevator.getInstance();
     Boolean isGrabberTwoSelected = true;
 
+    //Autonomous
+    public String robotPosition;// = "N";
 
     @Override
     public void robotInit() {
@@ -51,10 +53,16 @@ public class Robot extends IterativeRobot {
     }
 
 
+    public String getRobotPosition() {
+        SmartDashboard.getString("Robot Position: ", robotPosition);
+        return robotPosition;
+    }
+
     AutoModeExecuter autoModeExecuter = new AutoModeExecuter();
 
     @Override
     public void autonomousInit() {
+        SmartDashboard.getString("Robot Position: ", robotPosition);
         mDriveBase.mDrive.setSafetyEnabled(false);
         autoModeExecuter.setAutoMode(new TestAutoMode());
         autoModeExecuter.start();

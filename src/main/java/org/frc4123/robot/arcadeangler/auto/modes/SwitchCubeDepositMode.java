@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
+import org.frc4123.robot.arcadeangler.Robot;
 import org.frc4123.robot.arcadeangler.auto.actions.*;
 
 import java.io.File;
