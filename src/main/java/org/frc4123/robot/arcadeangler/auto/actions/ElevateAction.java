@@ -7,7 +7,7 @@ public class ElevateAction implements Action {
 
     private Elevator mElevator = Elevator.getInstance();
 
-    private enum Position {SWITCH, SCALE, DOWN};
+    public enum Position {SWITCH, SCALE, DOWN};
     private Elevator.Mode elevateMode;
     private boolean isElevationFinished = false;
 

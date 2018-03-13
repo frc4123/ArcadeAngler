@@ -7,7 +7,7 @@ public class ArmsPneumaticAction implements Action {
 
     private PneumaticGrabber mGrabber2 = PneumaticGrabber.getInstance();
 
-    private enum State {OPEN, CLOSE}
+    public enum State {OPEN, CLOSE}
 
     private PneumaticGrabber.GrabberState grabberState;
     private boolean isCubeGrabbed = false;

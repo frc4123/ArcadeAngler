@@ -8,7 +8,7 @@ public class ArmsWheelsAction implements Action {
 
     private final WheelsGrabber mGrabber1 = new WheelsGrabber();
 
-    private enum State {INTAKE, EJECT, STOP}
+    public enum State {INTAKE, EJECT, STOP}
 
     private double wheelSpeed = 0;
     private boolean isCubeGrabbed = false;

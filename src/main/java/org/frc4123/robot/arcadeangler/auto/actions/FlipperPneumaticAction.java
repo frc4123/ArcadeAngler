@@ -7,7 +7,7 @@ public class FlipperPneumaticAction implements Action {
 
     private PneumaticGrabber mGrabber2 = PneumaticGrabber.getInstance();
 
-    private enum State {DOWN, UP}
+    public enum State {DOWN, UP}
 
     private PneumaticGrabber.FlipperUpperState flipState;
     private boolean isFlippedDwn = false;
