@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
+        mDriveBase.resetDriveEncoders();
         mDriveBase.mDrive.setSafetyEnabled(true);
         mDriveBase.mDrive.stopMotor();
         System.out.println("Robot.disabledInit");
