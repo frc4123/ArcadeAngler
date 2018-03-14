@@ -49,4 +49,9 @@ public class DriveBase {
         r_master.setInverted(true);
         r_slave.setInverted(true);
     }
+
+    public void resetDriveEncoders(){
+        l_master.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+        r_master.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+    }
 }
