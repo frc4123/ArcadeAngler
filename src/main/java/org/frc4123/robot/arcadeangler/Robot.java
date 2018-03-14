@@ -1,20 +1,11 @@
 package org.frc4123.robot.arcadeangler;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import jaci.pathfinder.Pathfinder;
-import jaci.pathfinder.Trajectory;
-import jaci.pathfinder.Waypoint;
 import org.frc4123.robot.arcadeangler.auto.AutoModeExecuter;
-import org.frc4123.robot.arcadeangler.auto.modes.CrossBaselineMode;
 import org.frc4123.robot.arcadeangler.auto.modes.TestAutoMode;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
+import org.frc4123.robot.arcadeangler.control.SmarterDashboard;
 import org.frc4123.robot.arcadeangler.subsystems.DriveBase;
 import org.frc4123.robot.arcadeangler.subsystems.PneumaticGrabber;
 import org.frc4123.robot.arcadeangler.subsystems.WheelsGrabber;
@@ -32,6 +23,9 @@ public class Robot extends IterativeRobot {
     Elevator mElevator = Elevator.getInstance();
     Boolean isGrabberTwoSelected = true;
 
+    //SmartDashboard
+    SmarterDashboard mSmartDashboard = SmarterDashboard.getInstance();
+
 
     @Override
     public void robotInit() {
@@ -40,6 +34,9 @@ public class Robot extends IterativeRobot {
         //TODO: Test what happens when you have this enabled but there's no pneumatics commands
         //Compressor Enable Closed Loop Control (PCM does all the work)
         mGrabberTwo.squishyBoi.setClosedLoopControl(true);
+
+        //Smart Dashboard
+        mSmartDashboard.setAutoInfo();
     }
 
     @Override
@@ -55,6 +52,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        mSmartDashboard.getAutoInfo();
         mDriveBase.mDrive.setSafetyEnabled(false);
         autoModeExecuter.setAutoMode(new TestAutoMode());
         autoModeExecuter.start();
@@ -87,7 +85,7 @@ public class Robot extends IterativeRobot {
 
         mDriveBase.mDrive.arcadeDrive(mJoysticks.getTurn(), mJoysticks.getThrottle());
 
-        //Grabbers - Switch between from SmartDashboard, GrabberTwo is default
+        //Grabbers - Switch between from SmarterDashboard, GrabberTwo is default
         if (isGrabberTwoSelected) {
             //GrabberTwo Commands
             mGrabberTwo.setGrabberState(mJoysticks.getGrabberState());

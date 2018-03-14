@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import org.frc4123.robot.arcadeangler.auto.actions.*;
+import org.frc4123.robot.arcadeangler.control.SmarterDashboard;
 
 import java.io.File;
 
@@ -20,8 +21,7 @@ public class SwitchCubeDepositMode extends AutoModeBase {
 
         //Possible Values: R - right, L - left, C - center.
         //TODO: Test this to ensure it replaces like I thought it would
-        String robotPosition = "C";
-        SmartDashboard.getString("Robot Position: ", robotPosition);
+        SmarterDashboard.get
 
         Trajectory reverse_left = Pathfinder.readFromCSV(new File("/home/lvuser/trajectories/back_up_2ft_left_detailed.csv"));
         Trajectory reverse_right = Pathfinder.readFromCSV(new File("/home/lvuser/trajectories/back_up_2ft_right_detailed.csv"));
