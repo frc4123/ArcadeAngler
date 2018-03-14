@@ -1,6 +1,11 @@
 package org.frc4123.robot.arcadeangler.control;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
 public class SmartDashboard extends edu.wpi.first.wpilibj.smartdashboard.SmartDashboard {
+
+    SendableChooser robotPosition = new SendableChooser();
+    robotPos
 
     public void SmartDashboard(){
         //TODO
