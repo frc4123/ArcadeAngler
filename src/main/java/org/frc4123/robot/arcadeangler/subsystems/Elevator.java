@@ -47,7 +47,8 @@ public class Elevator {
         master.configAllowableClosedloopError(Constants.kPIDLoopIdx, 100, 10);
         //master.setIntegralAccumulator(0, Constants.kPIDLoopIdx, 10);
 
-        master.configOpenloopRamp(0.5, 0);
+        master.configOpenloopRamp(Constants.kOpenLoop_RampingSeconds, 0);
+        master.configClosedloopRamp(Constants.kClosedLoop_RampingSeconds, 0);
         slave.follow(master);
         
     }

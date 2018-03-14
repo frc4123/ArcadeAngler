@@ -50,6 +50,9 @@ public class Constants {
     public static final double kHeadingClosedLoop_Tolerance_Default = 1;
 
     //Elevator
+    public static final double kOpenLoop_RampingSeconds = 0.5;
+    public static final double kClosedLoop_RampingSeconds = 0;
+
 
     //public static final int kElevatorDefaultElevateSpeed = 1; TODO Possibly unneeded
     public static final int kElevatorMaxEncPos = 4000;
