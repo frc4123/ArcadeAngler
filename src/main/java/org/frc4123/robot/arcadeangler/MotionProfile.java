@@ -356,8 +356,8 @@ public class MotionProfile {
         for (int i = 0; i < trajectory.length(); i++) {
             Trajectory.Segment seg = trajectory.get(i);
             point = new TrajectoryPoint(); // TODO is this wasteful? We re-set everything we need to.. Why create a new object?
-            point.position = seg.position * Constants.kTicksPerMeter * Constants.kMetersPerFoot;
-            point.velocity = seg.velocity * 0.1 * Constants.kTicksPerMeter * Constants.kMetersPerFoot; // Native units per 100ms
+            point.position = seg.position * Constants.kTicksPerMeter;// * Constants.kMetersPerFoot;
+            point.velocity = seg.velocity * 0.1 * Constants.kTicksPerMeter;// * Constants.kMetersPerFoot; // Native units per 100ms
             //point.headingDeg = 0; /* future feature - not used in this example*/
 //            point.profileSlotSelect0 = 0; /* which set of gains would you like to use [0,3]? */ //TODO Use this?
 
