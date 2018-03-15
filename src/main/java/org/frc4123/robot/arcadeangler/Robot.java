@@ -37,6 +37,7 @@ public class Robot extends IterativeRobot {
 
         //Smart Dashboard
         mSmartDashboard.setAutoInfo();
+        SmartDashboard.updateValues();
     }
 
     @Override
