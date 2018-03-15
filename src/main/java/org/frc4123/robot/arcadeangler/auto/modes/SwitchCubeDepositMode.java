@@ -13,7 +13,6 @@ public class SwitchCubeDepositMode extends AutoModeBase {
     //@Override
 
     SmarterDashboard mSmartDashboard = SmarterDashboard.getInstance();
-    String robotPosition = mSmartDashboard.getSelectedRobotStartingPosition();
 
     Trajectory left;
     Trajectory right;
@@ -23,6 +22,8 @@ public class SwitchCubeDepositMode extends AutoModeBase {
     protected void routine() {
         String gameData;
         gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+        String robotPosition = mSmartDashboard.getSelectedRobotStartingPosition();
 
         //Possible Values: R - right, L - left, C - center.
         //TODO: Test this to ensure it replaces like I thought it would
