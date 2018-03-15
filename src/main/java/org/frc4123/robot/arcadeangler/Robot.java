@@ -27,7 +27,6 @@ public class Robot extends IterativeRobot {
     //SmartDashboard
     SmarterDashboard mSmartDashboard = SmarterDashboard.getInstance();
 
-
     @Override
     public void robotInit() {
         System.out.println("Robot.robotInit");
@@ -43,6 +42,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
+        mDriveBase.resetDriveEncoders();
         mDriveBase.mDrive.setSafetyEnabled(true);
         mDriveBase.mDrive.stopMotor();
         autoModeExecuter.stop();
@@ -51,11 +51,15 @@ public class Robot extends IterativeRobot {
     }
 
 
+    public String getRobotPosition() {
+        SmartDashboard.getString("Robot Position: ", robotPosition);
+        return robotPosition;
+    }
+
     AutoModeExecuter autoModeExecuter = new AutoModeExecuter();
 
     @Override
     public void autonomousInit() {
-        //mSmartDashboard.getAutoInfo();
         mDriveBase.mDrive.setSafetyEnabled(false);
         SmartDashboard.updateValues();
 

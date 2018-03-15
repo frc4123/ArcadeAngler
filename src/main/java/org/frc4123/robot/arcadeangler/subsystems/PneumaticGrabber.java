@@ -17,7 +17,7 @@ public class PneumaticGrabber {
     DoubleSolenoid grabFlipper = new DoubleSolenoid(0, 1);
     public Compressor squishyBoi = new Compressor(0);
 
-    public enum GrabberState {OPEN, CLOSE, NEUTRAL;}
+    public enum GrabberState {OPEN, CLOSE, NEUTRAL}
 
     private GrabberState grabState = GrabberState.NEUTRAL;
 

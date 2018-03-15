@@ -3,6 +3,7 @@ package org.frc4123.robot.arcadeangler.auto.modes;
 import edu.wpi.first.wpilibj.DriverStation;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
+import org.frc4123.robot.arcadeangler.Robot;
 import org.frc4123.robot.arcadeangler.auto.actions.*;
 import org.frc4123.robot.arcadeangler.control.SmarterDashboard;
 
