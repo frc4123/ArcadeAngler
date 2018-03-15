@@ -37,8 +37,8 @@ public class Robot extends IterativeRobot {
         mGrabberTwo.squishyBoi.setClosedLoopControl(true);
 
         //Smart Dashboard
-        mSmartDashboard.setAutoInfo();
-        SmartDashboard.updateValues();
+        mSmartDashboard.sendAutoInfo();
+        //SmartDashboard.updateValues();
     }
 
     @Override
@@ -57,9 +57,14 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         //mSmartDashboard.getAutoInfo();
         mDriveBase.mDrive.setSafetyEnabled(false);
+        SmartDashboard.updateValues();
+
+        System.out.println("selectedautomode = " + mSmartDashboard.getSelectedAutoMode());
+        System.out.println(mSmartDashboard.getSelectedRobotStartingPosition());
+
         autoModeExecuter.setAutoMode(mSmartDashboard.getSelectedAutoMode());
         autoModeExecuter.start();
-    }
+}
 
     @Override
     public void teleopInit() {
@@ -84,7 +89,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
 
-        SmartDashboard.getBoolean("Is Pneumatic Grabber Used?", isGrabberTwoSelected);
+        mSmartDashboard.getBoolean("Is Pneumatic Grabber Used?", isGrabberTwoSelected);
 
         mDriveBase.mDrive.arcadeDrive(mJoysticks.getTurn(), mJoysticks.getThrottle());
 
