@@ -3,6 +3,7 @@ package org.frc4123.robot.arcadeangler.control;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc4123.robot.arcadeangler.auto.modes.AutoModeBase;
 import org.frc4123.robot.arcadeangler.auto.modes.CrossBaselineMode;
 import org.frc4123.robot.arcadeangler.auto.modes.SwitchCubeDepositMode;
 import org.frc4123.robot.arcadeangler.auto.modes.TestAutoMode;
@@ -10,6 +11,7 @@ import org.frc4123.robot.arcadeangler.auto.modes.TestAutoMode;
 public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.SmartDashboard {
 
     private static SmarterDashboard mInstance = null;
+
     public static SmarterDashboard getInstance() {
         if (mInstance == null) {
             mInstance = new SmarterDashboard();
@@ -18,11 +20,14 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
     }
 
     public enum robotStartingPosition {CENTER, RIGHT, LEFT}
+
     private robotStartingPosition startPos = robotStartingPosition.CENTER;
-    public String robotPosition;
+    String robotPosition;
+    AutoModeBase selectedAutoMode;
     SendableChooser robotPositionChooser = new SendableChooser();
 
     SendableChooser autoModeChooser = new SendableChooser();
+
 
     public void setRobotStartingPosition(robotStartingPosition startingPos) {
         this.startPos = startingPos;
@@ -41,11 +46,7 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
         }
     }
 
-    public String getRobotStartingPosition(){
-        return robotPosition;
-    }
-
-    public void setAutoInfo(){
+    public void setAutoInfo() {
         robotPositionChooser.addDefault("Center", robotStartingPosition.CENTER);
         robotPositionChooser.addObject("Left", robotStartingPosition.LEFT);
         robotPositionChooser.addObject("Right", robotStartingPosition.RIGHT);
@@ -58,9 +59,17 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
         SmartDashboard.putData("Auto Mode", autoModeChooser);
 
     }
-    public void getAutoInfo(){
-        SmartDashboard.getData("Robot Position");
-        SmartDashboard.getData("Auto Mode");
+
+    //TODO: Test this
+    public AutoModeBase getSelectedAutoMode() {
+        selectedAutoMode = (AutoModeBase) autoModeChooser.getSelected();
+        return selectedAutoMode;
+        //TODO: place auto info into sd
+    }
+
+    public String getSelectedRobotStartingPosition() {
+        robotPosition = (String) robotPositionChooser.getSelected();
+        return robotPosition;
         //TODO: place auto info into sd
     }
 }

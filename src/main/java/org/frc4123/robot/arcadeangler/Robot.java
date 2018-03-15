@@ -3,6 +3,7 @@ package org.frc4123.robot.arcadeangler;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.frc4123.robot.arcadeangler.auto.AutoModeExecuter;
+import org.frc4123.robot.arcadeangler.auto.modes.AutoModeBase;
 import org.frc4123.robot.arcadeangler.auto.modes.TestAutoMode;
 import org.frc4123.robot.arcadeangler.control.Joysticks;
 import org.frc4123.robot.arcadeangler.control.SmarterDashboard;
@@ -54,9 +55,9 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        mSmartDashboard.getAutoInfo();
+        //mSmartDashboard.getAutoInfo();
         mDriveBase.mDrive.setSafetyEnabled(false);
-        autoModeExecuter.setAutoMode(new TestAutoMode());
+        autoModeExecuter.setAutoMode(mSmartDashboard.getSelectedAutoMode());
         autoModeExecuter.start();
     }
 

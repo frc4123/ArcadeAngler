@@ -1,7 +1,6 @@
 package org.frc4123.robot.arcadeangler.auto.modes;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
 import org.frc4123.robot.arcadeangler.auto.actions.*;
@@ -14,7 +13,7 @@ public class SwitchCubeDepositMode extends AutoModeBase {
     //@Override
 
     SmarterDashboard mSmartDashboard = SmarterDashboard.getInstance();
-    String robotPosition = mSmartDashboard.robotPosition;
+    String robotPosition = mSmartDashboard.getSelectedRobotStartingPosition();
 
     Trajectory left;
     Trajectory right;
