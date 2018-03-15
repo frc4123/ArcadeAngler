@@ -3,6 +3,9 @@ package org.frc4123.robot.arcadeangler.control;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.frc4123.robot.arcadeangler.auto.modes.CrossBaselineMode;
+import org.frc4123.robot.arcadeangler.auto.modes.SwitchCubeDepositMode;
+import org.frc4123.robot.arcadeangler.auto.modes.TestAutoMode;
 
 public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.SmartDashboard {
 
@@ -48,13 +51,16 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
         robotPositionChooser.addObject("Right", robotStartingPosition.RIGHT);
         SmartDashboard.putData("Robot Position", robotPositionChooser);
 
-//        autoModeChooser.addDefault("Cross Baseline", new );
-//        autoModeChooser.addObject("Deposit Cube in Switch", robotPosition = "L");
-//        autoModeChooser.addObject("Deposit Cube on Scale", robotPosition = "L");
+        autoModeChooser.addDefault("Cross Baseline", new CrossBaselineMode());
+        autoModeChooser.addObject("Deposit Cube in Switch", new SwitchCubeDepositMode());
+//        autoModeChooser.addObject("Deposit Cube in Scale", new ScaleCubeDepositMode());
+        autoModeChooser.addObject("TestAutoMode", new TestAutoMode());
+        SmartDashboard.putData("Auto Mode", autoModeChooser);
 
     }
     public void getAutoInfo(){
         SmartDashboard.getData("Robot Position");
+        SmartDashboard.getData("Auto Mode");
         //TODO: place auto info into sd
     }
 }

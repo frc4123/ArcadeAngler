@@ -44,8 +44,9 @@ public class Robot extends IterativeRobot {
     public void disabledInit() {
         mDriveBase.mDrive.setSafetyEnabled(true);
         mDriveBase.mDrive.stopMotor();
-        System.out.println("Robot.disabledInit");
         autoModeExecuter.stop();
+        System.out.println("Robot.disabledInit");
+        SmartDashboard.updateValues();
     }
 
 
