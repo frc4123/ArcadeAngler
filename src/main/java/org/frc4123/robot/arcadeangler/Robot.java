@@ -50,12 +50,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.updateValues();
     }
 
-
-    public String getRobotPosition() {
-        SmartDashboard.getString("Robot Position: ", robotPosition);
-        return robotPosition;
-    }
-
     AutoModeExecuter autoModeExecuter = new AutoModeExecuter();
 
     @Override
