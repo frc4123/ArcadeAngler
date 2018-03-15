@@ -19,9 +19,6 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
         return mInstance;
     }
 
-    public enum robotStartingPosition {CENTER, RIGHT, LEFT}
-
-    private robotStartingPosition startPos = robotStartingPosition.CENTER;
     String robotPosition;
     AutoModeBase selectedAutoMode;
     SendableChooser robotPositionChooser = new SendableChooser();
@@ -29,27 +26,10 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
     SendableChooser autoModeChooser = new SendableChooser();
 
 
-    public void setRobotStartingPosition(robotStartingPosition startingPos) {
-        this.startPos = startingPos;
-
-        switch (startPos) {
-            case CENTER:
-            default:
-                robotPosition = "C";
-                break;
-            case RIGHT:
-                robotPosition = "R";
-                break;
-            case LEFT:
-                robotPosition = "L";
-                break;
-        }
-    }
-
-    public void setAutoInfo() {
-        robotPositionChooser.addDefault("Center", robotStartingPosition.CENTER);
-        robotPositionChooser.addObject("Left", robotStartingPosition.LEFT);
-        robotPositionChooser.addObject("Right", robotStartingPosition.RIGHT);
+    public void sendAutoInfo() {
+        robotPositionChooser.addDefault("Center", robotPosition = "C");
+        robotPositionChooser.addObject("Left", robotPosition = "L");
+        robotPositionChooser.addObject("Right", robotPosition = "R");
         SmartDashboard.putData("Robot Position", robotPositionChooser);
 
         autoModeChooser.addDefault("Cross Baseline", new CrossBaselineMode());
