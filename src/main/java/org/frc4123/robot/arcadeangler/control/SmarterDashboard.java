@@ -27,9 +27,9 @@ public class SmarterDashboard extends edu.wpi.first.wpilibj.smartdashboard.Smart
 
 
     public void sendAutoInfo() {
-        robotPositionChooser.addDefault("Center", robotPosition = "C");
-        robotPositionChooser.addObject("Left", robotPosition = "L");
+        robotPositionChooser.addDefault("Left", robotPosition = "L");
         robotPositionChooser.addObject("Right", robotPosition = "R");
+        robotPositionChooser.addObject("Center", robotPosition = "C");
         SmartDashboard.putData("Robot Position", robotPositionChooser);
 
         autoModeChooser.addDefault("Cross Baseline", new CrossBaselineMode());
